@@ -1,0 +1,338 @@
+/* src/components/ContinuumExplorer/ContinuumExplorer.css */
+.continuum-explorer-section {
+  background-color: var(--dark-bg);
+  color: var(--light-text);
+  height: 100vh; /* Full viewport height */
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* For fixed/absolute children */
+  overflow: hidden; /* Critical: Prevents page scroll, map handles its own */
+}
+
+.continuum-controls-bar {
+  position: fixed; /* Keep controls visible */
+  top: calc(var(--spacing-md) + 40px); /* Adjusted to be below potential navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--dark-bg-transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.continuum-search-input {
+  background-color: rgba(var(--dark-accent-rgb), 0.7);
+  border: 1px solid rgba(var(--gold-accent-rgb), 0.2);
+  color: var(--light-text);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 6px;
+  min-width: 320px;
+  font-size: 0.9rem;
+  transition: var(--transition-fast);
+}
+.continuum-search-input::placeholder { color: var(--text-color-muted); }
+.continuum-search-input:focus {
+  outline: none;
+  border-color: var(--gold-accent);
+  box-shadow: 0 0 0 2px rgba(var(--gold-accent-rgb), 0.3);
+}
+
+.control-button {
+  background-color: rgba(var(--dark-accent-rgb), 0.5);
+  color: var(--light-text);
+  border: 1px solid rgba(var(--gold-accent-rgb), 0.2);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: var(--transition-fast);
+}
+.control-button:hover {
+  border-color: var(--gold-accent);
+  background-color: rgba(var(--gold-accent-rgb), 0.2);
+}
+.control-button.zoom-button {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+
+/* Viewport for the interactive map */
+.continuum-map-viewport {
+  flex-grow: 1;
+  position: relative; /* For positioning the interactive area */
+  overflow: hidden; 
+  cursor: grab; 
+  /* margin-top: calc(var(--spacing-md) * 2 + 40px + 50px); /* Space below controls bar, assuming navbar height approx 40-50px */
+  margin-top: 0; /* Let the controls bar float on top */
+  width: 100%;
+  height: 100%;
+}
+.continuum-map-viewport:active { cursor: grabbing; }
+
+.continuum-map-interactive-area {
+  width: 100%; 
+  height: 100%;
+  position: relative; 
+  transform-origin: center center; /* For scaling */
+  /* transition for direct style manipulation (if not using Framer Motion for transform) */
+  /* transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);  */
+}
+
+.connections-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+/* Removed empty ruleset for .connection-line */
+.connection-line.highlighted {
+  /* opacity: 0.8; */ /* Handled by Framer Motion */
+  /* stroke-width: 2px !important; */ /* Handled by Framer Motion */
+  filter: url(#glow);
+}
+
+
+.node-element {
+  position: absolute;
+  /* transform: translate(-50%, -50%) scale(0); */ /* Initial state handled by Framer Motion */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%; /* Circular core */
+  /* transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, box-shadow 0.3s ease; */ /* Handled by Framer Motion */
+  z-index: 10;
+  /* animation: popInNode 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; */ /* Replaced by Framer Motion */
+  will-change: transform, opacity; /* Performance hint */
+}
+/* @keyframes popInNode {
+  to { transform: translate(-50%, -50%) scale(1); }
+} */
+
+.node-element.dimmed {
+  opacity: 0.2 !important; /* Ensure Framer Motion aniamted opacity can be overridden if needed, or manage via variants */
+  pointer-events: auto; /* Still allow hover to potentially un-dim or show tooltip if desired */
+}
+.node-element.visible {
+  opacity: 1 !important;
+}
+/* Removed empty ruleset for .node-element.selected */
+
+
+.node-core {
+  width: 12px; /* Base size */
+  height: 12px;
+  background-color: var(--gold-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(var(--gold-accent-rgb), 0.5), 0 0 12px rgba(var(--gold-accent-rgb), 0.3);
+  transition: var(--transition-fast); /* For hover effects not covered by Framer's main animation */
+  position: relative; /* For pulse */
+}
+.node-element:hover .node-core, .node-element:focus .node-core {
+  /* transform: scale(1.3); */ /* Framer Motion handles hover scale on the whole element */
+  background-color: var(--gold-accent-hover);
+}
+.node-element.selected .node-core {
+  transform: scale(1.5); /* Specific scale for selected state */
+  background-color: var(--gold-accent-hover);
+  box-shadow: 0 0 15px var(--gold-accent), 0 0 25px var(--gold-accent);
+}
+
+/* Sizing based on node.size */
+.node-size-large .node-core { width: 20px; height: 20px; }
+.node-size-medium .node-core { width: 16px; height: 16px; }
+.node-size-small .node-core { width: 12px; height: 12px; }
+.node-size-default .node-core { width: 14px; height: 14px; } /* Fallback size */
+
+
+.node-text-label {
+  color: var(--text-color-muted);
+  font-size: 0.75rem;
+  margin-top: var(--spacing-xs);
+  background-color: rgba(var(--dark-bg-rgb), 0.7);
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  opacity: 0.7;
+  transform: translateY(5px);
+  transition: var(--transition-fast);
+}
+.node-element:hover .node-text-label, .node-element:focus .node-text-label {
+  opacity: 1;
+  color: var(--light-text);
+  transform: translateY(0);
+}
+.node-size-large .node-text-label { font-size: 0.85rem; margin-top: var(--spacing-sm); }
+
+
+/* Detail Panel */
+.detail-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  /* opacity: 0; */ /* Handled by Framer Motion */
+  /* animation: fadeInOverlay 0.3s ease-out forwards; */
+}
+/* @keyframes fadeInOverlay { to { opacity: 1; } } */
+
+.detail-panel-content {
+  background-color: var(--dark-accent);
+  padding: var(--spacing-xl);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  position: relative;
+  /* transform: scale(0.9); */ /* Handled by Framer Motion */
+  /* opacity: 0; */ /* Handled by Framer Motion */
+  /* animation: scaleInPanel 0.4s 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; */
+}
+/* @keyframes scaleInPanel { to { transform: scale(1); opacity: 1; } } */
+
+.detail-panel-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  font-size: 1.8rem;
+  line-height: 1;
+  padding: var(--spacing-xs);
+  color: var(--text-color-muted);
+  transition: var(--transition-fast);
+}
+.detail-panel-close:hover { color: var(--light-text); transform: scale(1.1); }
+
+.detail-panel-content h2 {
+  color: var(--gold-accent);
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.8rem;
+}
+.detail-panel-type {
+  font-size: 0.8rem;
+  color: var(--text-color-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-lg);
+}
+.detail-panel-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: var(--spacing-lg);
+}
+
+.detail-media-section, .detail-links-section {
+  margin-bottom: var(--spacing-lg);
+}
+.detail-media-section h4, .detail-links-section h4 {
+  color: var(--gold-accent);
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.media-item img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-bottom: var(--spacing-sm);
+}
+.media-item iframe {
+  max-width: 100%;
+  border-radius: 6px;
+}
+.detail-links-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+.detail-links-section li a {
+  display: inline-block;
+  margin-bottom: var(--spacing-xs);
+  padding: var(--spacing-xs) 0;
+}
+
+
+.detail-cta-button {
+  display: inline-block;
+  background-color: var(--gold-accent);
+  color: var(--dark-bg) !important; /* Ensure high contrast */
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-fast);
+  margin-top: var(--spacing-md);
+}
+.detail-cta-button:hover {
+  background-color: var(--gold-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(var(--gold-accent-rgb),0.3);
+}
+
+.continuum-status-bar {
+    position: fixed;
+    bottom: var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--dark-bg-transparent);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--text-color-muted);
+    text-align: center;
+}
+.continuum-controls-bar {
+  position: fixed;
+  /* top: var(--spacing-md); */ /* Original value */
+  /* Adjusted to be potentially below a SiteNavbar if SiteNavbar is fixed */
+  top: calc(var(--spacing-md) + 0px); /* Adjust 0px if SiteNavbar has height */
+  /* If SiteNavbar.jsx is not fixed or not present, you can revert top to var(--spacing-md) */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; /* Ensure it's above map but below detail panel overlay */
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--dark-bg-transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+
+.return-button { /* New styles for the return button */
+  background-color: rgba(var(--gold-accent-rgb), 0.1); /* Subtle gold hint */
+  color: var(--gold-accent);
+  border: 1px solid rgba(var(--gold-accent-rgb), 0.3);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-weight: 500;
+}
+.return-button:hover {
+  background-color: rgba(var(--gold-accent-rgb), 0.2);
+  border-color: var(--gold-accent);
+}

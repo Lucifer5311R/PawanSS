@@ -1,0 +1,432 @@
+/* src/components/BasicInfoPage/BasicInfoPage.css */
+
+html, body { /* Ensure body can scroll */
+  scroll-behavior: smooth;
+}
+
+.basic-info-scroll-container {
+  width: 100%;
+  /* min-height: 100vh; */ /* REMOVED - Let content define height for body scroll */
+  background-color: var(--dark-bg);
+  color: var(--light-text);
+  /* overflow-y: auto; */ /* REMOVED - Body will handle scrolling */
+  position: relative; /* For AnimatePresence page transitions */
+}
+
+/* --- Hero Section (Split Layout) --- */
+.hero-section-minimal {
+  min-height: 100vh; /* Hero itself is full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  box-sizing: border-box;
+  background: linear-gradient(135deg, var(--dark-accent) 0%, var(--dark-bg) 60%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content-split {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: var(--spacing-lg);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .hero-content-split {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--spacing-xxl);
+    text-align: left;
+  }
+}
+
+.hero-text-content {
+  flex: 1.5;
+}
+
+@media (min-width: 768px) {
+  .hero-text-content {
+    padding-right: var(--spacing-lg);
+  }
+}
+
+.hero-greeting {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 300;
+  color: var(--text-color-muted);
+  margin-bottom: var(--spacing-xs);
+}
+
+.hero-main-name {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 700;
+  color: var(--gold-accent);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.1;
+}
+
+.hero-core-roles {
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  color: var(--light-text);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.4;
+}
+
+.hero-brief-intro {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-color);
+  line-height: 1.65;
+  max-width: 550px;
+  margin-bottom: var(--spacing-xl);
+}
+
+.hero-social-icons {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .hero-social-icons {
+    justify-content: flex-start;
+  }
+}
+
+.hero-social-icons a {
+  color: var(--text-color-muted);
+  font-size: 1.6rem;
+  transition: color 0.2s ease; /* Framer motion handles transform */
+}
+/* Hover color can be set by Framer Motion in JSX: whileHover={{color: "var(--gold-accent)"}} */
+
+.scroll-prompt {
+  display: inline-block;
+  margin-top: var(--spacing-xl);
+  color: var(--text-color-muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.scroll-prompt:hover {
+  color: var(--gold-accent);
+}
+.scroll-prompt .arrow-down {
+  margin-left: var(--spacing-xs);
+  display: inline-block;
+  animation: bounceArrow 1.5s infinite ease-in-out;
+}
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+.hero-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 350px;
+  width: 100%;
+}
+
+.hero-profile-img {
+  width: clamp(180px, 30vw, 300px);
+  height: clamp(180px, 30vw, 300px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--dark-accent);
+  box-shadow: 0 10px 40px rgba(0,0,0, 0.3), 0 0 0 10px var(--dark-bg);
+}
+.hero-image-placeholder {
+    width: clamp(180px, 30vw, 280px);
+    height: clamp(180px, 30vw, 280px);
+    border-radius: 50%;
+    background-color: var(--gold-accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    font-weight: bold;
+    color: var(--dark-bg);
+    box-shadow: 0 0 30px rgba(var(--gold-accent-rgb), 0.4);
+    user-select: none;
+}
+
+/* --- General Content Section Styling --- */
+.content-section {
+  width: 100%;
+  padding: var(--spacing-xxl) var(--spacing-lg);
+  box-sizing: border-box;
+  text-align: center;
+}
+.expertise-highlight-section {
+  background-color: var(--dark-bg);
+}
+.insights-section {
+  background-color: var(--dark-accent);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--gold-accent);
+  margin-bottom: var(--spacing-xl);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* --- Expertise Section --- */
+.expertise-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.expertise-card {
+  background-color: var(--dark-element-bg);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  border: 1px solid rgba(var(--gold-accent-rgb), 0.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  text-align: left;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* For non-Framer hover, or base */
+  display: flex;
+  flex-direction: column;
+}
+
+.expertise-card:hover { /* CSS hover as fallback or addition to Framer's whileHover */
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(var(--gold-accent-rgb),0.2);
+}
+
+.expertise-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.expertise-icon {
+  font-size: 1.8rem;
+  color: var(--gold-accent);
+  margin-right: var(--spacing-md);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.expertise-card h3 {
+  font-size: 1.25rem;
+  color: var(--light-text);
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.expertise-description {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+  flex-grow: 1;
+}
+
+.expertise-details-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: auto;
+}
+
+.expertise-details-list li {
+  font-size: 0.9rem;
+  color: var(--text-color-muted);
+  padding-left: var(--spacing-md);
+  position: relative;
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.5;
+}
+
+.expertise-details-list li::before {
+  content: "▹";
+  color: var(--gold-accent);
+  position: absolute;
+  left: 0;
+  font-size: 0.9em;
+  line-height: inherit;
+}
+
+/* --- Insights Section --- */
+.insights-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.insight-card-link-wrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Base for non-Framer */
+  border-radius: 10px; /* Match card if wrapper is what gets hover effect */
+}
+.insight-card-link-wrapper:hover { /* CSS hover as fallback or addition to Framer's whileHover */
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.insight-card {
+  background-color: var(--dark-element-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.insight-card-image-container {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--dark-accent);
+}
+.insight-image-actual {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-out;
+}
+.insight-card-link-wrapper:hover .insight-image-actual { /* Image zoom for CSS hover */
+  transform: scale(1.05);
+}
+
+.insight-card-icon {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.8);
+  background-color: rgba(var(--dark-bg-rgb), 0.5);
+  padding: var(--spacing-xs);
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.insight-card-content {
+  padding: var(--spacing-lg);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.insight-type {
+  font-size: 0.7rem;
+  color: var(--gold-accent);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.insight-card h4 {
+  font-size: 1.15rem;
+  color: var(--light-text);
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.3;
+}
+
+.insight-snippet {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-md);
+  flex-grow: 1;
+}
+
+.insight-tags {
+  margin-bottom: var(--spacing-sm);
+  flex-wrap: wrap;
+  display: flex;
+  gap: var(--spacing-xs);
+}
+.insight-tags .tag {
+  display: inline-block;
+  background-color: rgba(var(--gold-accent-rgb), 0.1);
+  color: var(--gold-accent);
+  font-size: 0.7rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 4px;
+}
+
+.insight-link {
+  font-size: 0.85rem;
+  color: var(--gold-accent);
+  text-decoration: none;
+  font-weight: 600;
+  align-self: flex-start;
+  margin-top: auto;
+  transition: letter-spacing 0.2s ease-out;
+}
+.insight-link:hover {
+  letter-spacing: 0.5px;
+  text-decoration: underline;
+}
+
+/* --- Continuum Invitation Section --- */
+.continuum-invitation-section {
+  padding: var(--spacing-xxl) var(--spacing-lg) calc(var(--spacing-xxl) + var(--spacing-lg));
+  background-color: var(--dark-bg);
+  text-align: center;
+}
+.continuum-narrative {
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  color: var(--text-color-muted);
+  max-width: 700px;
+  margin: 0 auto var(--spacing-md);
+  line-height: 1.7;
+}
+.continuum-invite-title {
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  color: var(--light-text);
+  margin-bottom: var(--spacing-xl);
+  font-weight: 500;
+}
+.launch-continuum-button {
+  font-family: var(--font-primary);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--spacing-lg) var(--spacing-xxl);
+  border-radius: 50px;
+  color: var(--dark-bg);
+  border: none;
+  background: var(--gold-accent);
+  background: linear-gradient(45deg, var(--gold-accent), var(--gold-accent-hover));
+  box-shadow: 0 5px 20px rgba(var(--gold-accent-rgb), 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Base for Framer hover */
+}
+
+/* --- Minimal Page Footer --- */
+.minimal-page-footer {
+  width: 100%;
+  padding: var(--spacing-lg);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-color-muted);
+  background-color: var(--dark-accent);
+  border-top: 1px solid rgba(var(--gold-accent-rgb), 0.05);
+}
