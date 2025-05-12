@@ -1,0 +1,58 @@
+/* ## File: src/components/InitiativesList.module.css */
+
+.initiativesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem; /* Slightly increased gap */
+}
+
+.initiativeCard {
+  background-color: var(--white-color);
+  padding: 2rem 1.5rem; /* More padding */
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* border-left: 4px solid var(--secondary-color); /* Accent border */ 
+  position: relative;
+  overflow: hidden; /* For potential pseudo-element effects */
+}
+
+.initiativeCard::before { /* Subtle hover effect */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--secondary-color);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+  transform-origin: bottom;
+}
+
+
+.initiativeCard:hover {
+   transform: translateY(-5px);
+   box-shadow: var(--card-hover-shadow);
+}
+
+.initiativeCard:hover::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+
+.cardTitle {
+  /* Use global h3 styles */
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+  font-size: 1.3rem; /* Adjust size */
+}
+
+.cardText {
+  font-size: 0.95rem;
+  color: var(--text-color-muted);
+  line-height: 1.6;
+  margin-bottom: 0; /* Remove bottom margin if it's the last element */
+}
