@@ -1,7 +1,8 @@
 :root {
   --primary-color: #0a3d62; /* Darker, sophisticated blue */
   --secondary-color: #1e88e5; /* Brighter blue for accents/links */
-  --accent-color: #f9a825; /* Warm yellow/gold accent */
+  --accent-color-rgb: 249, 168, 37; 
+  --primary-color-rgb: 10, 61, 98;
   --light-bg-color: #f8f9fa;
   --white-color: #ffffff;
   --dark-bg-color: #12181b; /* Very dark grey/off-black */

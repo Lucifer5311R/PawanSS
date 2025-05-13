@@ -11,8 +11,6 @@ import './index.css'; // Import global styles
 function App() {
   return (
     <div className="art-of-law-app">
-      {/* Each component now handles its own primary styling via CSS Modules */}
-      {/* Global classes like bg-light/bg-dark applied within components */}
       <Hero />
       <Team />
       <InitiativesList />
