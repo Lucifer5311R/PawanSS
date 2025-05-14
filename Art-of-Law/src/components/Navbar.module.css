@@ -1,0 +1,247 @@
+/* src/components/Navbar.module.css (Editorial Focus) */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0.8rem 0; /* Slimmer padding */
+  background-color: rgba(255, 255, 255, 0); /* Start fully transparent */
+  border-bottom: 1px solid transparent; /* Initially no border */
+  transition: background-color 0.4s ease, box-shadow 0.4s ease, border-bottom-color 0.4s ease, padding 0.4s ease;
+}
+
+.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.85); /* Subtle frosted glass on scroll */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.04); /* Very subtle shadow */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0.6rem 0;
+}
+
+.navbar.menuActiveBackground { /* When mobile menu is open, ensure navbar has background */
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.navContainer {
+  width: 100%;
+  max-width: var(--container-width, 1280px); /* Adjust as per your global container */
+  margin: 0 auto;
+  padding: 0 2rem; /* Horizontal padding for content within navbar */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  z-index: 1001; /* Above mobile menu when closed */
+}
+
+.logo {
+  height: 32px; /* Small, discreet logo icon */
+  width: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.logoLink:hover .logo {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.navbar.scrolled .logo {
+  opacity: 0.9; /* Slightly more prominent on scroll */
+}
+
+
+.navLinksDesktop {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Spacing between links */
+}
+
+.navLinksDesktop a {
+  font-family: var(--font-family-sans);
+  font-size: 0.88rem; /* Elegant, readable size */
+  font-weight: 500;
+  color: var(--text-color-muted, #555); /* Muted color for links */
+  text-decoration: none;
+  padding: 0.25rem 0; /* Minimal vertical padding */
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navLinksDesktop a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* Position underline slightly below */
+  left: 0;
+  width: 0;
+  height: 1px; /* Fine underline */
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.navLinksDesktop a:hover {
+  color: var(--primary-color);
+}
+
+.navLinksDesktop a:hover::after {
+  width: 100%;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navButton { /* Base style for buttons in nav */
+  font-family: var(--font-family-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem; /* Standard padding */
+  border-radius: 5px; /* Subtle radius */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.loginRegisterBtn {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color); /* Outline style */
+}
+.loginRegisterBtn:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  box-shadow: 0 2px 8px rgba(var(--primary-color-rgb), 0.15);
+}
+
+.menuToggle {
+  display: none; /* Hidden on desktop */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1002; /* Above everything for interaction */
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+.menuToggle:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+
+.menuIconSVG {
+  width: 22px;
+  height: 22px;
+  stroke: var(--text-color-dark, #333); /* Default stroke for icons */
+  transition: stroke 0.3s ease;
+}
+.navbar.scrolled .menuIconSVG {
+  stroke: var(--text-color-dark, #222);
+}
+
+
+/* Mobile Overlay Menu */
+.navMenuMobileOverlay {
+  position: fixed;
+  top: 0; /* Start from top of viewport */
+  left: 0;
+  width: 100vw;
+  height: 100vh; height: 100dvh; /* Ensure full dynamic viewport height */
+  background-color: rgba(255, 255, 255, 0.98); /* Almost opaque white */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000; /* Below navbar controls but above page */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem; /* Spacing for menu items */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px); /* Subtle entry animation */
+  transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease;
+}
+
+.navMenuMobileOverlay.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease;
+}
+
+.navMenuMobileOverlay a,
+.navMenuMobileOverlay .loginRegisterBtnMobile {
+  font-family: var(--font-family-sans);
+  font-size: 1.3rem; /* Larger, touch-friendly text */
+  font-weight: 500;
+  color: var(--text-color-dark);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInMenuItemMobile 0.4s ease forwards;
+}
+
+/* Staggered animation for mobile menu items */
+.navMenuMobileOverlay.active a:nth-child(1) { animation-delay: 0.1s; }
+.navMenuMobileOverlay.active a:nth-child(2) { animation-delay: 0.15s; }
+.navMenuMobileOverlay.active a:nth-child(3) { animation-delay: 0.2s; }
+.navMenuMobileOverlay.active a:nth-child(4) { animation-delay: 0.25s; }
+.navMenuMobileOverlay.active a:nth-child(5) { animation-delay: 0.3s; }
+.navMenuMobileOverlay.active .loginRegisterBtnMobile {
+  animation-delay: 0.35s;
+  margin-top: 1rem;
+  border-color: var(--primary-color); /* Ensure it's styled like desktop */
+  color: var(--primary-color);
+  background-color: transparent;
+  width: auto; /* Allow natural width */
+  min-width: 180px;
+  text-align: center;
+}
+.navMenuMobileOverlay.active .loginRegisterBtnMobile:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+
+@keyframes fadeInMenuItemMobile {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Breakpoints for Navbar */
+@media (max-width: 992px) { /* Tablet and below */
+  .navLinksDesktop {
+    display: none; /* Hide desktop links */
+  }
+  .menuToggle {
+    display: flex; /* Show hamburger menu */
+  }
+  .navContainer {
+    padding: 0 1.5rem; /* Adjust padding for smaller screens */
+  }
+}
+
+@media (max-width: 480px) { /* Small mobile */
+  .navContainer {
+    padding: 0 1rem;
+  }
+  .logo {
+    height: 28px;
+  }
+  .loginRegisterBtn { /* Hide desktop login button if it feels too crowded */
+    /* display: none; */ /* Or make it smaller */
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+  }
+  .menuIconSVG {
+    width: 20px;
+    height: 20px;
+  }
+}
