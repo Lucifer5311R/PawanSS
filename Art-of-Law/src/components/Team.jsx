@@ -119,23 +119,7 @@ In addition to his academic and professional achievements, Kamal has completed i
 
 Advocate Kamal Adithya K's unwavering dedication to the legal profession, combined with his academic rigor, practical experience, and passion for justice, positions him as a promising and impactful legal professional. His strong foundation in both theoretical and applied aspects of law, coupled with his commitment to addressing societal challenges, makes him a valuable asset to the legal community and a champion for equitable access to justice.
 
-<h4>Academic Excellence and Institutional Recognition</h4>
-<ul>
-<li>Student of the Year Award (2025), School of Law, CHRIST (Deemed to be University): Recognized for excellence in academics, leadership, research, and student engagement.</li>
-</ul>
-
-<h4>Leadership and Initiative</h4>
-<ul>
-<li>Convenor, Environmental Law Studies and Orientation Programme (2023-2024): Designed interactive workshops, seminars, and field visits, bridging theory with real-world applications.</li>
-<li>University Student Council Member (2022-2023): Represented BBA LLB, LLM, and PhD in Law students, advocating for their needs in university academic and extracurricular affairs; played a key role in shaping university policies, organizing events, and fostering community.</li>
-</ul>
-
-<h4>Research Innovation</h4>
-<ul>
-<li>Project Coordinator, ICSSR (2024-2025): Currently serving under the guidance of Dr. Sapna S (Head of Department and Associate Dean) for the Indian Council for Social Science Research (ICSSR), contributing to impactful social science research initiatives addressing pressing issues such as inequality, education, and social security for the unorganized working sector.</li>
-<li>Hosted National Conference on empowering the unorganized working sector with the School of Law, CHRIST (Deemed to be University).</li>
-<li>Led multidisciplinary research projects, enhancing student access to legal research tools and fostering a culture of academic excellence.</li>
-</ul>`,
+`,
       image: '/images/kamal-k.jpg',
     },
   ];
