@@ -1,149 +1,43 @@
 /* ## File: src/components/Team.module.css */
 
-.teamSection {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.teamSection.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.sectionTitle {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 3rem;
-}
-
-.sectionTitle::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  width: 0;
-  height: 3px;
-  background-color: var(--accent-color);
-  transform: translateX(-50%);
-  transition: width 1s ease;
-}
-
-.teamSection.visible .sectionTitle::after {
-  width: 80px;
-}
-
 .teamGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  /* Adjust columns for different screen sizes */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem; /* Increased gap */
 }
 
 .teamMemberCard {
   background-color: var(--white-color);
-  padding: 2.5rem 2rem;
+  padding: 2rem;
   border-radius: var(--border-radius);
   box-shadow: var(--card-shadow);
   text-align: center;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  display: flex;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex; /* Use flexbox for internal alignment */
   flex-direction: column;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(40px);
-  border-bottom: 4px solid transparent;
-  cursor: pointer;
-}
-
-.teamMemberCard.visible {
-  opacity: 1;
-  transform: translateY(0);
+  align-items: center; /* Center items horizontally */
 }
 
 .teamMemberCard:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px); /* More pronounced lift */
   box-shadow: var(--card-hover-shadow);
-  border-bottom: 4px solid var(--accent-color);
-}
-
-.teamMemberCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0;
-  background: linear-gradient(to bottom, rgba(var(--primary-color-rgb, 10, 61, 98), 0.05), transparent);
-  transition: height 0.4s ease;
-  z-index: 0;
-}
-
-.teamMemberCard:hover::before {
-  height: 100%;
-}
-
-.imageContainer {
-  position: relative;
-  margin-bottom: 1.5rem;
 }
 
 .teamMemberImage {
-  width: 160px;
-  height: 160px;
+  width: 150px; /* Slightly larger image */
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--white-color);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 2;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-
-.teamMemberCard:hover .teamMemberImage {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(var(--accent-color-rgb, 249, 168, 37), 0.2);
-}
-
-.imageBorder {
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  right: -8px;
-  bottom: -8px;
-  border-radius: 50%;
-  border: 2px dashed var(--accent-color);
-  opacity: 0;
-  transform: scale(1.1);
-  transition: all 0.5s ease;
-  z-index: 1;
-}
-
-.teamMemberCard:hover .imageBorder {
-  opacity: 0.7;
-  transform: scale(1) rotate(10deg);
-  animation: rotateAnimation 10s linear infinite;
-}
-
-@keyframes rotateAnimation {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  margin-bottom: 1.5rem; /* Increased space below image */
+  border: 4px solid var(--white-color); /* White border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow around image */
 }
 
 .teamMemberName {
   margin-bottom: 0.5rem;
   color: var(--primary-color);
-  font-size: 1.5rem;
-  position: relative;
-  z-index: 1;
-  transition: color 0.3s ease;
-}
-
-.teamMemberCard:hover .teamMemberName {
-  color: var(--secondary-color);
+  font-size: 1.4rem; /* Adjust size */
 }
 
 .teamMemberRole {
@@ -151,201 +45,22 @@
   color: var(--text-color-muted);
   margin-bottom: 1rem;
   font-size: 0.95rem;
-  position: relative;
-  z-index: 1;
-  transition: color 0.3s ease;
 }
 
 .teamMemberBio {
   font-size: 0.95rem;
   color: var(--text-color-dark);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  position: relative;
-  z-index: 1;
+  text-align: center; /* Center bio text */
+  flex-grow: 1; /* Allow bio to take available space */
+  margin-bottom: 1rem; /* Space before links */
 }
 
-.readMoreButton {
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  background-color: rgba(var(--primary-color-rgb, 10, 61, 98), 0.1);
-  color: var(--primary-color);
-  border-radius: 30px;
+.teamMemberLinks a {
+  color: var(--secondary-color);
+  text-decoration: underline;
   font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
+  margin: 0 0.5rem;
 }
-
-.teamMemberCard:hover .readMoreButton {
-  background-color: var(--accent-color);
-  color: black;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(var(--accent-color-rgb, 249, 168, 37), 0.3);
-}
-
-.socialLinks {
-  display: flex;
-  gap: 1rem;
-  margin-top: auto;
-  position: relative;
-  z-index: 1;
-}
-
-.socialIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: rgba(var(--primary-color-rgb, 10, 61, 98), 0.1);
+.teamMemberLinks a:hover {
   color: var(--primary-color);
-  transition: all 0.3s ease;
-}
-
-.socialIcon:hover {
-  background-color: var(--accent-color);
-  color: white;
-  transform: translateY(-3px);
-}
-
-/* Modal Styles */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 1rem;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.bioModal {
-  background-color: var(--white-color);
-  border-radius: var(--border-radius);
-  width: 100%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.closeButton {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: var(--text-color-muted);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  z-index: 10;
-}
-
-.closeButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: var(--primary-color);
-  transform: rotate(90deg);
-}
-
-.modalContent {
-  padding: 0;
-}
-
-.modalHeader {
-  display: flex;
-  align-items: center;
-  padding: 2rem 2rem 1.5rem;
-  background-color: rgba(var(--primary-color-rgb, 10, 61, 98), 0.05);
-  border-bottom: 1px solid rgba(var(--primary-color-rgb, 10, 61, 98), 0.1);
-}
-
-.modalImageContainer {
-  flex-shrink: 0;
-  margin-right: 1.5rem;
-}
-
-.modalImage {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.modalTitleContainer {
-  flex-grow: 1;
-}
-
-.modalTitle {
-  margin: 0 0 0.5rem;
-  color: var(--primary-color);
-  font-size: 1.8rem;
-}
-
-.modalRole {
-  margin: 0;
-  font-style: italic;
-  color: var(--text-color-muted);
-  font-size: 1rem;
-}
-
-.modalBody {
-  padding: 2rem;
-}
-
-.bioParagraph {
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
-  color: var(--text-color-dark);
-  font-size: 1rem;
-}
-
-.bioParagraph:last-child {
-  margin-bottom: 0;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .modalHeader {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .modalImageContainer {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-  
-  .modalImage {
-    width: 120px;
-    height: 120px;
-  }
 }

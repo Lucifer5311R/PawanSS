@@ -290,6 +290,7 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
                     </button>
                 </form>
              )}
+             
            </div>
          </div>
       )}

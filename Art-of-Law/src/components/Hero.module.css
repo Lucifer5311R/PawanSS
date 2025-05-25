@@ -1,6 +1,7 @@
 /* src/components/Hero.module.css (Editorial Focus) */
 
 .heroSection {
+<<<<<<< HEAD
   min-height: 100vh; min-height: 100dvh;
   width: 100%;
   display: flex;
@@ -126,12 +127,39 @@
   font-size: clamp(1rem, 2vw, 1.15rem);
   color: var(--text-color-dark, #34495e); /* Slightly less prominent than title */
   margin-bottom: 2.2rem;
+=======
+  min-height: 70vh; /* Adjust height as needed */
+  display: flex;
+  align-items: center; /* Vertically center content */
+  text-align: center;
+  /* Optional background - consider subtle pattern or gradient */
+  /* background: linear-gradient(to bottom, var(--light-bg-color), #eef2f7); */
+}
+
+.heroContainer {
+  /* Container class is global, additional styling specific to hero container */
+  max-width: 800px; /* Limit width of hero text */
+}
+
+.heroTitle {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+   /* Use global h1 styles, maybe override font-weight if needed */
+   font-weight: 700;
+}
+
+.heroSubtitle {
+  font-size: clamp(1.1rem, 3vw, 1.3rem); /* Responsive font size */
+  color: var(--text-color-muted);
+  margin-bottom: 2.5rem;
+>>>>>>> parent of 26031b0 (Sherly version added)
   line-height: 1.6;
   font-weight: 500; /* Clear but not overly bold */
 }
 
 .heroActions {
   display: flex;
+<<<<<<< HEAD
   flex-wrap: wrap; /* Allow buttons to wrap if needed */
   gap: 0.8rem; /* Spacing between buttons */
   margin-top: 1rem;
@@ -330,3 +358,45 @@
   }
 }
   
+=======
+  flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+  justify-content: center;
+  gap: 1rem; /* Space between buttons */
+}
+
+.heroBtn {
+  /* Use global .btn styles */
+  min-width: 160px; /* Give buttons minimum width */
+}
+
+/* Example Outline Button Style (define if used) */
+.heroBtn.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.heroBtn.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  transform: none; /* Override global button hover lift if desired */
+  box-shadow: none;
+}
+
+/* Media query specific to hero if needed */
+@media (max-width: 576px) {
+  .heroSection {
+     min-height: 60vh;
+     padding-top: 3rem;
+     padding-bottom: 3rem;
+  }
+  .heroActions {
+     flex-direction: column; /* Stack buttons */
+     align-items: center;
+     gap: 0.8rem;
+  }
+  .heroBtn {
+     width: 80%; /* Make buttons wider */
+  }
+}
+>>>>>>> parent of 26031b0 (Sherly version added)

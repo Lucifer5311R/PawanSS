@@ -1,8 +1,11 @@
-
+// ## File: src/components/InitiativesList.jsx (Using CSS Modules)
 
 import React from 'react';
 import styles from './InitiativesList.module.css'; // Import the CSS Module
 
+// Placeholder for icons - replace with actual icons later
+// Option 1: Use Unicode characters (simple, limited)
+// Option 2: Use an icon library (e.g., react-icons, lucide-react) - Recommended
 const PlaceholderIcon = () => <span style={{ marginRight: '8px', color: 'var(--secondary-color)' }}>&#9733;</span>; // Example star
 
 function InitiativesList() {
@@ -15,8 +18,10 @@ function InitiativesList() {
 
           {/* Initiative Card 1 */}
           <div className={styles.initiativeCard}>
+             {/* <PlaceholderIcon /> Replace with actual Icon component */}
              <h3 className={styles.cardTitle}>Legal Training Sessions</h3>
              <p className={styles.cardText}>Providing practical legal training to empower individuals and professionals.</p>
+             {/* Based on item from: */}
           </div>
 
           {/* Initiative Card 2 */}

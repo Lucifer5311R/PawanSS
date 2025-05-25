@@ -37,6 +37,7 @@ function AppContent() {
 
   return (
     <div className="art-of-law-app">
+<<<<<<< HEAD
       <Navbar onToggleLoginModal={toggleLoginModal} />
       <Routes>
         <Route path="/" element={<HomePage heroProps={heroModalProps} />} />
@@ -54,6 +55,15 @@ function AppContent() {
         <Route path="/unauthorized" element={<div style={{ textAlign: 'center', padding: '50px', minHeight: '60vh' }}><h1>Unauthorized Access</h1><p>You do not have permission to view this page.</p><Link to="/">Go to Homepage</Link></div>} />
         <Route path="*" element={<div style={{ textAlign: 'center', padding: '50px', minHeight: '60vh' }}><h1>404 - Not Found</h1><p>The page you are looking for does not exist.</p><Link to="/">Go to Homepage</Link></div>} />
       </Routes>
+=======
+      {/* Each component now handles its own primary styling via CSS Modules */}
+      {/* Global classes like bg-light/bg-dark applied within components */}
+      <Hero />
+      <Team />
+      <InitiativesList />
+      <AwardsRecognition />
+      <Contact />
+>>>>>>> parent of 26031b0 (Sherly version added)
     </div>
   );
 }

@@ -1,3 +1,4 @@
+
 // src/components/Team.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Team.module.css'; //
@@ -209,6 +210,7 @@ function Team() {
       )}
     </div>
   );
+
 }
 
 export default Team;
