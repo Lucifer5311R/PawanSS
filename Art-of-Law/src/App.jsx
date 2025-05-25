@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, Link } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import HomePage from './components/HomePage';
+import HomePage from './components/HomePage'; // Make sure HomePage is imported
 import MyBookings from './components/MyBookings';
 import OrganizerBookings from './components/OrganizerBookings';
 import SlotBooking from './components/SlotBooking';
-import OrganizerAvailability from './components/OrganizerAvailability'; // <<< IMPORT NEW COMPONENT
+import OrganizerAvailability from './components/OrganizerAvailability';
 
 import { AuthProvider, useAuth } from './AuthContext.jsx';
 import './index.css';
@@ -25,8 +25,7 @@ const OrganizerProtectedRoute = () => {
   if (currentUser && (currentUser.role === 'organizer' || currentUser.role === 'admin')) {
     return <Outlet />;
   }
-  // If not organizer/admin but logged in, redirect to home or an unauthorized page
-  return <Navigate to="/unauthorized" replace />; 
+  return <Navigate to="/unauthorized" replace />;
 };
 
 function AppContent() {
@@ -37,33 +36,23 @@ function AppContent() {
 
   return (
     <div className="art-of-law-app">
-<<<<<<< HEAD
       <Navbar onToggleLoginModal={toggleLoginModal} />
       <Routes>
         <Route path="/" element={<HomePage heroProps={heroModalProps} />} />
-        
+
         <Route element={<UserProtectedRoute />}>
           <Route path="/my-bookings" element={<MyBookings />} />
           <Route path="/book-slot" element={<SlotBooking />} />
         </Route>
-        
+
         <Route element={<OrganizerProtectedRoute />}>
           <Route path="/organizer-dashboard" element={<OrganizerBookings />} />
-          <Route path="/organizer-settings/availability" element={<OrganizerAvailability />} /> {/* <<< ADD NEW ROUTE */}
+          <Route path="/organizer-settings/availability" element={<OrganizerAvailability />} />
         </Route>
-        
+
         <Route path="/unauthorized" element={<div style={{ textAlign: 'center', padding: '50px', minHeight: '60vh' }}><h1>Unauthorized Access</h1><p>You do not have permission to view this page.</p><Link to="/">Go to Homepage</Link></div>} />
         <Route path="*" element={<div style={{ textAlign: 'center', padding: '50px', minHeight: '60vh' }}><h1>404 - Not Found</h1><p>The page you are looking for does not exist.</p><Link to="/">Go to Homepage</Link></div>} />
       </Routes>
-=======
-      {/* Each component now handles its own primary styling via CSS Modules */}
-      {/* Global classes like bg-light/bg-dark applied within components */}
-      <Hero />
-      <Team />
-      <InitiativesList />
-      <AwardsRecognition />
-      <Contact />
->>>>>>> parent of 26031b0 (Sherly version added)
     </div>
   );
 }
