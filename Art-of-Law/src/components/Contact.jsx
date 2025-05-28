@@ -1,11 +1,25 @@
 // ## File: src/components/Contact.jsx (Using CSS Modules)
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Contact.module.css'; // Import CSS Module
+import PaymentForm from './PaymentForm';
 // Optional: Import icons for social links
 // import { FaLinkedin, FaYoutube, FaInstagram } from 'react-icons/fa';
 
 function Contact() {
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [consultationType, setConsultationType] = useState('standard');
+  const [consultationFee, setConsultationFee] = useState(7500);
+  
+  const handleConsultationTypeChange = (type, fee) => {
+    setConsultationType(type);
+    setConsultationFee(fee);
+  };
+  
+  const handlePaymentClick = () => {
+    setShowPaymentForm(true);
+  };
+  
   return (
     <section id="contact" className={`section ${styles.contactSection} bg-dark`}>
       <div className="container">
@@ -13,7 +27,7 @@ function Contact() {
 
         <div className={styles.contactContent}>
           <p className={styles.contactLead}>
-            Have questions about our work, want to collaborate, or interested in our programs? We encourage you to reach out.
+            Have questions about our work, want to collaborate, or interested in our legal services? We encourage you to reach out.
           </p>
 
           {/* Contact Info */}
@@ -36,11 +50,42 @@ function Contact() {
             {/* Links potentially from: */}
           </div>
 
-          {/* Optional: Placeholder for a simple form or link to a form page */}
-          {/* <div className={styles.contactAction}>
-             <a href="/contact-form" className="btn btn-accent">Send a Message</a>
-          </div> */}
-
+          {/* Legal Consultation Payment Section */}
+          <div className={styles.supportSection}>
+            <h3>Legal Consultation Services</h3>
+            <p>Select a consultation type and proceed with payment to schedule your session with our legal experts.</p>
+            
+            {!showPaymentForm ? (
+              <div className={styles.donationOptions}>
+                <button 
+                  className={`${styles.donationButton} ${consultationType === 'basic' ? styles.selected : ''}`}
+                  onClick={() => handleConsultationTypeChange('basic', 5000)}
+                >
+                  Basic Consultation<br /><span className={styles.feeAmount}>₹5,000</span>
+                </button>
+                <button 
+                  className={`${styles.donationButton} ${consultationType === 'standard' ? styles.selected : ''}`}
+                  onClick={() => handleConsultationTypeChange('standard', 7500)}
+                >
+                  Standard Consultation<br /><span className={styles.feeAmount}>₹7,500</span>
+                </button>
+                <button 
+                  className={`${styles.donationButton} ${consultationType === 'comprehensive' ? styles.selected : ''}`}
+                  onClick={() => handleConsultationTypeChange('comprehensive', 12500)}
+                >
+                  Comprehensive Consultation<br /><span className={styles.feeAmount}>₹12,500</span>
+                </button>
+                <button 
+                  className={styles.donateNowButton}
+                  onClick={handlePaymentClick}
+                >
+                  Proceed to Payment
+                </button>
+              </div>
+            ) : (
+              <PaymentForm amount={consultationFee} />
+            )}
+          </div>
         </div>
       </div>
     </section>

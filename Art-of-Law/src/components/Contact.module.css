@@ -1,5 +1,20 @@
 /* ## File: src/components/Contact.module.css */
 
+.contactSection {
+  /* Uses bg-dark from global styles */
+}
+
+.contactTitle {
+ /* Uses section-title from global, override if needed */
+ /* border-bottom-color: var(--white-color); */ /* Already handled by bg-dark */
+}
+
+.contactContent {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* ## File: src/components/Contact.module.css */
 
 .contactContent {
   max-width: 700px;
@@ -7,6 +22,123 @@
   text-align: center;
 }
 
+.contactLead {
+  font-size: clamp(1rem, 2.5vw, 1.15rem); /* Responsive */
+  color: #ced4da; /* Lighter text */
+  margin-bottom: 2.5rem;
+}
+
+.contactInfo p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.contactInfo strong {
+  color: var(--text-color-light); /* Brighter label */
+}
+
+.contactInfo a {
+  /* Uses global dark styles */
+  font-weight: 500;
+}
+
+.socialLinks {
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.socialLinks a {
+  color: var(--text-color-light);
+  font-size: 1.8rem; /* Size for icons */
+  margin: 0 0.8rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block; /* Needed for transform */
+}
+
+.socialLinks a:hover {
+  color: var(--accent-color);
+  transform: translateY(-3px); /* Lift icon on hover */
+  text-decoration: none;
+}
+
+.contactAction {
+  margin-top: 2rem;
+}
+
+/* New styles for donation section */
+.supportSection {
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.supportSection h3 {
+  color: var(--text-color-light, #f8f9fa);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.supportSection p {
+  color: #ced4da;
+  margin-bottom: 1.5rem;
+}
+
+.donationOptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.donationButton {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color-light, #f8f9fa);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.feeAmount {
+  display: block;
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
+  font-weight: 700;
+  color: var(--accent-color, #f59e0b);
+}
+
+.donationButton:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.donationButton.selected {
+  background-color: var(--primary-color, #0c4a6e);
+  border-color: var(--primary-color, #0c4a6e);
+}
+
+.donateNowButton {
+  background-color: var(--accent-color, #f59e0b);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-left: 1rem;
+}
+
+.donateNowButton:hover {
+  background-color: #e59000;
+  transform: translateY(-2px);
+}
 .contactLead {
   font-size: clamp(1rem, 2.5vw, 1.15rem); /* Responsive */
   color: #ced4da; /* Lighter text */

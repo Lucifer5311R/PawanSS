@@ -1,0 +1,181 @@
+/* src/components/SlotBooking.module.css */
+.slotBookingPage {
+  max-width: 750px; /* Slightly wider */
+  margin: 2rem auto;
+  padding: 2rem; /* More padding */
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  font-family: var(--font-family-sans);
+}
+
+.pageTitle {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 2rem; /* Increased margin */
+  font-size: 2em;
+  font-family: var(--font-family-serif);
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Increased gap between form groups */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  margin-bottom: 0.6rem; /* Increased margin */
+  font-weight: 600;
+  color: var(--text-color-dark);
+  font-size: 0.95rem;
+}
+
+.bookingForm input[type="date"],
+.bookingForm select,
+.bookingForm .textArea { /* Assuming you might add a class for textarea if needed */
+  width: 100%;
+  padding: 0.8rem 1rem; /* Increased padding */
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: var(--light-bg-color); /* Light background for inputs */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bookingForm input[type="date"]:focus,
+.bookingForm select:focus,
+.bookingForm .textArea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.15); /* Softer focus ring */
+  background-color: var(--white-color);
+}
+
+.textArea { /* Specific styling for textarea if you add this class */
+    min-height: 80px;
+    resize: vertical;
+}
+
+.actionButton,
+.submitBookingButton {
+  display: inline-block; /* Allow side-by-side if container allows */
+  width: auto; /* Auto width based on content and padding */
+  min-width: 180px; /* Minimum width */
+  padding: 0.9rem 1.8rem; /* Adjusted padding */
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1.05rem; /* Slightly larger font */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-top: 1rem;
+  text-align: center;
+}
+.actionButton:first-of-type { /* If it's the "Show Slots" button */
+    background-color: var(--secondary-color);
+}
+
+
+.actionButton:hover,
+.submitBookingButton:hover {
+  background-color: var(--accent-color); /* Use accent for hover */
+  color: var(--text-color-dark);
+  transform: translateY(-2px);
+}
+
+.actionButton:disabled,
+.submitBookingButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.slotsContainer {
+  margin-top: 2rem; /* Increased margin */
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.slotsContainer h3 {
+  margin-bottom: 1.25rem; /* Increased margin */
+  color: var(--primary-color);
+  font-size: 1.3em;
+}
+
+.slotsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Slightly wider buttons */
+  gap: 1rem; /* Increased gap */
+}
+
+.slotButton {
+  padding: 0.85rem; /* Increased padding */
+  background-color: var(--light-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.slotButton:hover {
+  background-color: #e0e0e0;
+  border-color: var(--secondary-color);
+}
+
+.slotButton.selectedSlot { /* Class name used in SlotBooking.jsx */
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.selectedSlotInfo {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background-color: #eef7ff; /* Light blueish background */
+  border-radius: var(--border-radius);
+  border: 1px solid var(--secondary-color);
+}
+
+.selectedSlotInfo h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1.2em;
+}
+
+.errorMessage,
+.successMessage {
+  padding: 1rem; /* Increased padding */
+  margin: 1.5rem 0; /* More vertical margin */
+  border-radius: var(--border-radius);
+  text-align: center;
+  font-size: 1.05em;
+  font-weight: 500;
+}
+
+.errorMessage {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.successMessage {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}

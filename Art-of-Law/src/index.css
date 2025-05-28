@@ -1,186 +1,58 @@
+/* src/index.css */
 :root {
-  --primary-color: #0a3d62; /* Darker, sophisticated blue */
-  --secondary-color: #1e88e5; /* Brighter blue for accents/links */
-  --accent-color-rgb: 249, 168, 37; 
+  --primary-color: #0a3d62;
   --primary-color-rgb: 10, 61, 98;
+  --secondary-color: #1e88e5;
+  --accent-color: #f9a825;
+  --accent-color-rgb: 249, 168, 37;
   --light-bg-color: #f8f9fa;
   --white-color: #ffffff;
-  --dark-bg-color: #12181b; /* Very dark grey/off-black */
+  --dark-bg-color: #12181b;
   --text-color-light: #e9ecef;
   --text-color-dark: #212529;
   --text-color-muted: #6c757d;
   --border-color: #dee2e6;
   --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   --card-hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
- --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-family-serif: 'Lora', Georgia, serif;
   --container-width: 1140px;
-  --border-radius: 6px; /* Consistent border radius */
+  --border-radius: 6px;
 }
 
-/* --- Font Import (Example using Google Fonts) --- */
-/* Add this to your public/index.html <head> or use a different font loading strategy */
-/*
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-*/
-
-
-/* --- Basic Reset & Defaults --- */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth; /* Enable smooth scrolling for anchor links */
-}
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-family-sans);
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--text-color-dark);
   background-color: var(--white-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
-
-/* --- Base Typography --- */
-h1, h2, h3, h4, h5, h6 {
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--primary-color);
-}
-
-h1 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: 1rem; font-weight: 700; } /* Responsive font size */
-h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 2rem; font-weight: 700;} /* Section headings */
-h3 { font-size: clamp(1.3rem, 3vw, 1.6rem); color: var(--primary-color); font-weight: 600; }
-h4 { font-size: clamp(1.1rem, 2.5vw, 1.2rem); font-weight: 600; }
-
-p {
-  margin-bottom: 1rem;
-  font-size: clamp(0.95rem, 2vw, 1rem); /* Responsive font size */
-}
-
-a {
-  color: var(--secondary-color);
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-
-a:hover {
-  color: var(--primary-color);
-  text-decoration: none; /* Optional: Remove underline on hover too */
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-ul, ol {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem; /* Default padding for lists */
-}
-
-/* --- Layout Helpers --- */
-.container {
-  width: 100%;
-  max-width: var(--container-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.section {
-  padding: 4rem 0; /* More vertical padding */
-}
-@media (min-width: 768px) {
-  .section {
-    padding: 5rem 0;
-  }
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-.section-title::after { /* Optional: Subtle underline for section titles */
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background-color: var(--accent-color);
-  margin: 0.75rem auto 0;
-}
-
-
-/* --- Background Colors --- */
+h1, h2, h3, h4, h5, h6 { margin-bottom: 0.75rem; font-weight: 600; line-height: 1.3; color: var(--primary-color); }
+h1 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: 1rem; font-weight: 700; }
+h2.section-title { font-size: clamp(1.8rem, 4vw, 2.4rem); text-align: center; margin-bottom: 3rem; font-weight: 700; }
+h2.section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--accent-color); margin: 0.75rem auto 0; }
+p { margin-bottom: 1rem; font-size: clamp(0.95rem, 2vw, 1rem); }
+a { color: var(--secondary-color); text-decoration: none; transition: color 0.2s ease-in-out; }
+a:hover { color: var(--primary-color); }
+img { max-width: 100%; height: auto; display: block; }
+.container { width: 100%; max-width: var(--container-width); margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+.section { padding: 4rem 0; }
+@media (min-width: 768px) { .section { padding: 5rem 0; } }
 .bg-light { background-color: var(--light-bg-color); }
-.bg-white { background-color: var(--white-color); }
-.bg-dark {
-  background-color: var(--dark-bg-color);
-  color: var(--text-color-light);
-}
-.bg-dark h1, .bg-dark h2, .bg-dark h3, .bg-dark h4 { color: var(--white-color); }
+.bg-dark { background-color: var(--dark-bg-color); color: var(--text-color-light); }
+.bg-dark h1, .bg-dark h2, .bg-dark h3, .bg-dark h4, .bg-dark .section-title { color: var(--white-color); }
 .bg-dark p { color: #adb5bd; }
 .bg-dark a { color: var(--accent-color); }
 .bg-dark a:hover { color: #ffcf6f; }
 .bg-dark .section-title::after { background-color: var(--white-color); }
-
-
-/* --- Buttons (Can be global or moved to specific modules if needed) --- */
-.btn {
-  display: inline-block;
-  padding: 0.8rem 1.8rem;
-  font-size: 1rem;
-  font-weight: 600; /* Bolder buttons */
-  text-align: center;
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase; /* Uppercase button text */
-  letter-spacing: 0.5px;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: var(--white-color);
-}
-.btn-primary:hover {
-  background-color: #082f54; /* Darker primary */
-  border-color: #082f54;
-  color: var(--white-color);
-  transform: translateY(-2px); /* Subtle lift */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.btn-accent {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
-  color: var(--text-color-dark);
-}
-.btn-accent:hover {
-  background-color: #f59f00; /* Darker accent */
-  border-color: #f59f00;
-  color: var(--text-color-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* --- Utilities --- */
-.text-center { text-align: center; }
-.mb-1 { margin-bottom: 0.5rem !important; }
-.mb-2 { margin-bottom: 1rem !important; }
-.mb-3 { margin-bottom: 1.5rem !important; }
-.mb-4 { margin-bottom: 2rem !important; }
-.mb-5 { margin-bottom: 3rem !important; }
+.btn { display: inline-block; padding: 0.8rem 1.8rem; font-size: 1rem; font-weight: 600; text-align: center; text-decoration: none; border: 1px solid transparent; border-radius: var(--border-radius); cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px; }
+.btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); color: var(--white-color); }
+.btn-primary:hover { background-color: #082f54; border-color: #082f54; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); }
+.btn-outline { background-color: transparent; border-color: var(--primary-color); color: var(--primary-color); }
+.btn-outline:hover { background-color: var(--primary-color); color: var(--white-color); }
+.btn-accent { background-color: var(--accent-color); border-color: var(--accent-color); color: var(--text-color-dark); }
+.btn-accent:hover { background-color: #f59f00; border-color: #f59f00; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(var(--accent-color-rgb), 0.2); }

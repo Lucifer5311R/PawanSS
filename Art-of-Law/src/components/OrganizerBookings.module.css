@@ -1,0 +1,138 @@
+/* src/components/OrganizerBookings.module.css */
+.organizerDashboardPage {
+  max-width: 1200px; /* Wider for tables */
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: var(--font-family-sans);
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+}
+
+.pageTitle {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 2.2em;
+  font-family: var(--font-family-serif);
+}
+
+.controlsBar {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: var(--light-bg-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap; /* Allow controls to wrap on smaller screens */
+}
+
+.controlsBar label {
+  font-weight: 500;
+  margin-right: 0.5rem;
+  color: var(--text-color-dark);
+}
+
+.controlsBar input[type="date"],
+.controlsBar select {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+.bookingsTableContainer {
+  overflow-x: auto; /* For responsiveness on small screens */
+}
+
+.bookingsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem; /* Add some space if controlsBar is present */
+}
+
+.bookingsTable th,
+.bookingsTable td {
+  border: 1px solid var(--border-color);
+  padding: 0.8rem 1rem; /* Consistent padding */
+  text-align: left;
+  font-size: 0.9rem;
+  vertical-align: middle; /* Better alignment for cells */
+}
+
+.bookingsTable th {
+  background-color: var(--primary-color); /* Use primary color for header */
+  color: var(--white-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bookingsTable tbody tr:nth-child(even) {
+  background-color: var(--light-bg-color);
+}
+
+.bookingsTable tbody tr:hover {
+  background-color: #e9ecef; /* Slightly darker hover */
+}
+
+.statusCellContent { /* Wrapper for status text for padding and centering */
+  display: inline-block;
+  padding: 0.3em 0.7em;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: bold;
+  color: white;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* Status Colors (match MyBookings or define specific ones) */
+.statusConfirmed { background-color: #28a745; }
+.statusPending_payment { background-color: #ffc107; color: #333 !important; }
+.statusCancelled_by_user,
+.statusCancelled_by_organizer { background-color: #dc3545; }
+.statusCompleted { background-color: #6c757d; }
+
+.actionSelect {
+  padding: 0.6rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  min-width: 160px; /* Ensure select is wide enough */
+  background-color: var(--white-color);
+  cursor: pointer;
+}
+
+.loadingState,
+.errorStateContainer, /* Updated class name */
+.emptyStateContainer { /* Updated class name */
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-color-muted);
+}
+
+.errorMessageText { /* Updated class name */
+  color: #dc3545;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.retryButton {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  /* ... other styles from MyBookings ... */
+}
+.retryButton:hover {
+  background-color: var(--secondary-color);
+}
+
+.emptyStateTitle {
+  font-size: 1.5em;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.emptyStateText {
+  font-size: 1.1em;
+  margin-bottom: 1.5rem;
+}

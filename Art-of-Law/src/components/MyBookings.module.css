@@ -1,0 +1,174 @@
+/* src/components/MyBookings.module.css */
+.myBookingsPage {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem 2rem 1.5rem; /* Added more bottom padding */
+  font-family: var(--font-family-sans);
+  background-color: var(--white-color); /* Ensuring a background for the page */
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+}
+
+.pageTitle {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 2.2em; /* Slightly larger */
+  font-family: var(--font-family-serif);
+}
+
+.loadingState,
+.errorStateContainer, /* Updated class name */
+.emptyStateContainer { /* Updated class name */
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-color-muted);
+  background-color: var(--light-bg-color);
+  border-radius: var(--border-radius);
+  margin-top: 2rem;
+}
+
+.errorMessageText { /* Updated class name */
+  color: #dc3545; /* Red for errors */
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-size: 1.1em;
+}
+
+.retryButton,
+.bookNowButton {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: 0.85rem 1.8rem; /* Slightly adjusted padding */
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.retryButton:hover,
+.bookNowButton:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.emptyStateTitle {
+  font-size: 1.5em;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.emptyStateText {
+  font-size: 1.1em;
+  margin-bottom: 1.5rem;
+}
+
+.bookingsGrid {
+  display: grid;
+  gap: 1.75rem; /* Slightly increased gap */
+  grid-template-columns: 1fr; /* Default to single column for better mobile */
+}
+
+/* For wider screens, maybe 2 columns */
+@media (min-width: 768px) {
+  .bookingsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
+}
+
+
+.bookingCard {
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--primary-color); /* Accent border */
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.07);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.bookingCard:hover {
+  box-shadow: var(--card-hover-shadow);
+  transform: translateY(-3px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to start for multi-line titles */
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--border-color); /* Dashed for softer look */
+}
+
+.cardHeader h3 {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.statusBadge {
+  padding: 0.4em 0.8em;
+  border-radius: 15px; /* More pill-like */
+  font-size: 0.8em;
+  font-weight: bold; /* Bolder status */
+  color: white;
+  text-transform: uppercase; /* Uppercase status */
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Specific status colors (using data attributes or more specific classes if needed) */
+.statusConfirmed { background-color: #28a745; /* Green */ }
+.statusPending_payment { background-color: #ffc107; /* Yellow/Orange */ color: #333 !important; } /* Important for text visibility */
+.statusCancelled_by_user,
+.statusCancelled_by_organizer { background-color: #dc3545; /* Red */ }
+.statusCompleted { background-color: #6c757d; /* Grey */ }
+
+
+.cardBody p {
+  margin: 0.6rem 0;
+  line-height: 1.65;
+  font-size: 0.95rem;
+  color: var(--text-color-dark);
+}
+
+.cardBody strong {
+  color: var(--primary-color);
+  margin-right: 0.5em;
+  font-weight: 600;
+}
+
+.cardFooter {
+  margin-top: 1.25rem;
+  text-align: right;
+}
+
+.cancelButton {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #c9302c;
+  transform: translateY(-2px);
+}
+
+/* Icon styling (if you use react-icons) */
+.icon {
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
