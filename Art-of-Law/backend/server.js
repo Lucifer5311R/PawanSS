@@ -15,7 +15,7 @@ const app = express();
 
 // CORS configuration (allow credentials if using cookies/sessions)
 app.use(cors({
-  origin:'https://pawan-ss-artoflaw.vercel.app/', // Your frontend URL
+  origin:'https://pawan-ss-artoflaw.vercel.app', // Your frontend URL
   credentials: true // If you plan to use cookies or sessions for auth
 }));
 
