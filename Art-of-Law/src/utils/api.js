@@ -3,7 +3,7 @@ export const getAuthToken = () => localStorage.getItem('token');
 
 export const fetchApi = async (endpoint, options = {}) => {
   const token = getAuthToken();
-  const backendUrl = 'http://localhost:5000'; // Your backend URL
+  const backendUrl = 'https://art-of-law.onrender.com'; // Your backend URL
   const defaultHeaders = { 'Content-Type': 'application/json' };
   if (token) defaultHeaders['Authorization'] = `Bearer ${token}`;
 
