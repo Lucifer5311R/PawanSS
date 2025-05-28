@@ -25,9 +25,24 @@ function AwardsRecognition() {
           {/* Award Item 2 */}
           <div className={styles.awardItem}>
              <AwardIcon />
-            <h3 className={styles.awardTitle}>Project Njaayam - UNAI</h3>
+            <h3 className={styles.awardTitle}>Project Nyayam - UNAI</h3>
             <p className={styles.awardDetail}>Recognition from the United Nations Academic Impact (Details pending).</p>
              {/* Mentioned in list: */}
+          </div>
+
+          {/* Award Item 5 */}
+          <div className={styles.awardItem}>
+             <AwardIcon />
+            <h3 className={styles.awardTitle}>Baazigar Recognition</h3>
+            <p className={styles.awardDetail}>Specific recognition or award titled "Baazigar" (Context details pending).</p>
+            {/* Mentioned in list: */}
+
+           {/* Award Item 4 */}
+          <div className={styles.awardItem}>
+             <AwardIcon />
+            <h3 className={styles.awardTitle}>Best Coordination Award</h3>
+            <p className={styles.awardDetail}>Recognition for outstanding coordination efforts (Context details pending).</p>
+              {/* Mentioned in list: */}
           </div>
 
           {/* Award Item 3 */}
@@ -45,18 +60,12 @@ function AwardsRecognition() {
           {/* Award Item 4 */}
           <div className={styles.awardItem}>
              <AwardIcon />
-            <h3 className={styles.awardTitle}>Best Coordination Award</h3>
+            <h3 className={styles.awardTitle}>Highest community service award</h3>
             <p className={styles.awardDetail}>Recognition for outstanding coordination efforts (Context details pending).</p>
               {/* Mentioned in list: */}
           </div>
 
-          {/* Award Item 5 */}
-          <div className={styles.awardItem}>
-             <AwardIcon />
-            <h3 className={styles.awardTitle}>Baazigar Recognition</h3>
-            <p className={styles.awardDetail}>Specific recognition or award titled "Baazigar" (Context details pending).</p>
-            {/* Mentioned in list: */}
-          </div>
+         
 
         </div>
       </div>
