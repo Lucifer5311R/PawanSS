@@ -129,7 +129,7 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
     }
 
     const endpoint = formType === 'login' ? '/api/auth/login' : '/api/auth/register';
-    const backendUrl = 'http://localhost:5000'; // Ensure this is your backend URL
+    const backendUrl = 'https://art-of-law.onrender.com'; // Ensure this is your backend URL
 
     try {
       const response = await fetch(`${backendUrl}${endpoint}`, {

@@ -47,7 +47,7 @@ const PaymentForm = ({ amount, onPaymentSuccess, onPaymentError }) => {
       }
       
       // Backend URL for creating order
-      const backendUrl = 'http://localhost:5000'; // Ensure this is your backend URL
+      const backendUrl = 'https://art-of-law.onrender.com'; // Ensure this is your backend URL
 
       const orderResponse = await fetch(`${backendUrl}/api/payment/create-order`, { //
         method: 'POST',
