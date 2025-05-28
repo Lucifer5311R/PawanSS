@@ -19,8 +19,8 @@ function InitiativesList() {
           {/* Initiative Card 1 */}
           <div className={styles.initiativeCard}>
              {/* <PlaceholderIcon /> Replace with actual Icon component */}
-             <h3 className={styles.cardTitle}>Legal Training Sessions</h3>
-             <p className={styles.cardText}>Providing practical legal training to empower individuals and professionals.</p>
+             <h3 className={styles.cardTitle}>Legal Training Sessions and Legal Hackathon</h3>
+             <p className={styles.cardText}>Providing practical legal training to empower individuals and professionals.Fostering innovation in law and technology through hackathon events.</p>
              {/* Based on item from: */}
           </div>
 
@@ -48,14 +48,7 @@ function InitiativesList() {
               {/* Based on item from: */}
           </div>
 
-          {/* Initiative Card 5 */}
-          <div className={styles.initiativeCard}>
-            {/* <PlaceholderIcon /> */}
-            <h3 className={styles.cardTitle}>Legal Hackathon</h3>
-            <p className={styles.cardText}>Fostering innovation in law and technology through hackathon events.</p>
-             {/* Based on item from: */}
-          </div>
-
+        
           {/* Initiative Card 6 */}
           <div className={styles.initiativeCard}>
             {/* <PlaceholderIcon /> */}
