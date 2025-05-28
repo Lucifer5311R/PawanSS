@@ -51,8 +51,6 @@ function AwardsRecognition() {
             <h3 className={styles.awardTitle}>Student of the Year (2025)</h3>
 
             <p className={styles.awardDetail}>Awarded to Pawan SS by CHRIST University School of Law for overall excellence.</p>
-
-            <p className={styles.awardDetail}>Awarded to Adv. Kamal Adithya K by CHRIST University School of Law for overall excellence.</p>
             {/* Details from: */}
 
           </div>
