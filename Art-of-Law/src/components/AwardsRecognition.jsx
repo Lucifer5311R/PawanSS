@@ -26,7 +26,7 @@ function AwardsRecognition() {
       id: 5,
       title: 'Baazigar Recognition',
       detail: 'Awarded for outstanding achievement under the “Baazigar” title.',
-      randomInfo: 'The "Baazigar" recognition likely celebrates a remarkable achievement in the “University Business Fair ‘Bazigar’ 2024” - Showcased innovative business and legal strategies, inspiring students to merge law and entrepreneurship.',
+      randomInfo: 'The "Baazigar" recognition likely celebrates a remarkable achievement in the “University Business Fair Bazigar 2024” - Showcased innovative business and legal strategies, inspiring students to merge law and entrepreneurship.',
     },
     {
       id: 4,
