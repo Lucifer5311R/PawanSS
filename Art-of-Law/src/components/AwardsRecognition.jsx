@@ -1,14 +1,12 @@
 // ## File: src/components/AwardsRecognition.jsx (Using CSS Modules)
 
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './AwardsRecognition.module.css'; // Import CSS Module
 
 // Placeholder Icon - Replace later
 const AwardIcon = () => <span className={styles.awardIcon}>&#127942;</span>; // Example trophy icon
 
 function AwardsRecognition() {
-  const [expandedAward, setExpandedAward] = useState(null);
-
   const awardsData = [
     {
       id: 1,
@@ -18,7 +16,7 @@ function AwardsRecognition() {
     },
     {
       id: 2,
-      title: 'Project Nyayam  UNAI',
+      title: 'Project Nyayam \u00A0UNAI',
       detail: 'UNAI recognition for impactful legal initiatives.',
       randomInfo: 'Project Nyayam received this recognition for its contributions to promoting justice and the rule of law.',
     },
@@ -48,10 +46,6 @@ function AwardsRecognition() {
     },
   ];
 
-  const toggleReadMore = (awardId) => {
-    setExpandedAward(expandedAward === awardId ? null : awardId);
-  };
-
   return (
     <section id="recognition" className="section">
       <div className="container">
@@ -62,13 +56,10 @@ function AwardsRecognition() {
             <div key={award.id} className={styles.awardItem}>
               <AwardIcon />
               <h3 className={styles.awardTitle}>{award.title}</h3>
-              <p className={styles.awardDetail}>{award.detail}</p>
-              {expandedAward === award.id && (
-                <p className={styles.awardRandomInfo}>{award.randomInfo}</p>
-              )}
-              <button className={styles.readMoreBtn} onClick={() => toggleReadMore(award.id)}>
-                {expandedAward === award.id ? 'Read Less' : 'Read More'}
-              </button>
+              <p className={styles.awardDetail}>
+                {award.detail}
+                {award.randomInfo && <div className={styles.awardRandomInfo}>{award.randomInfo}</div>}
+              </p>
               {/* Details from:, Mentioned in list: */}
             </div>
           ))}
