@@ -65,15 +65,15 @@ function Contact() {
                 </button>
                 <button 
                   className={`${styles.donationButton} ${consultationType === 'standard' ? styles.selected : ''}`}
-                  onClick={() => handleConsultationTypeChange('standard', 1500)}
+                  onClick={() => handleConsultationTypeChange('standard', 1,500)}
                 >
-                  Standard Consultation<br /><span className={styles.feeAmount}>₹1500</span>
+                  Standard Consultation<br /><span className={styles.feeAmount}>₹1,500</span>
                 </button>
                 <button 
                   className={`${styles.donationButton} ${consultationType === 'comprehensive' ? styles.selected : ''}`}
-                  onClick={() => handleConsultationTypeChange('comprehensive', 2500)}
+                  onClick={() => handleConsultationTypeChange('comprehensive', 2,500)}
                 >
-                  Comprehensive Consultation<br /><span className={styles.feeAmount}>2500</span>
+                  Comprehensive Consultation<br /><span className={styles.feeAmount}>2,500</span>
                 </button>
                 <button 
                   className={styles.donateNowButton}
