@@ -1,5 +1,6 @@
 // ## File: src/components/InitiativesList.jsx (Using CSS Modules)
 
+
 import React from 'react';
 import styles from './InitiativesList.module.css'; // Import the CSS Module
 import { Link } from 'react-router-dom'; // Assuming you'll use React Router
@@ -60,7 +61,7 @@ function InitiativesList() {
   );
 }
 
-export default InitiativesList;
+
 
 // ## File: src/components/InitiativeDetails.jsx
 
