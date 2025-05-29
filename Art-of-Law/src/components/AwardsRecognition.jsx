@@ -31,7 +31,7 @@ function AwardsRecognition() {
     {
       id: 4,
       title: 'Best Coordination Award',
-      detail: 'Awarded for exemplary coordination and leadership (details pending).',
+      detail: 'Awarded for exemplary coordination and leadership.',
       randomInfo: 'This award acknowledges exceptional teamwork and organizational skills demonstrated in a specific event or project. Further context regarding this recognition will be shared.',
     },
     {
