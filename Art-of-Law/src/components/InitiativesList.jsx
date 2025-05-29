@@ -20,7 +20,7 @@ function InitiativesList() {
           <div className={styles.initiativeCard}>
              {/* <PlaceholderIcon /> Replace with actual Icon component */}
              <h3 className={styles.cardTitle}>Legal Training Sessions and Legal Hackathon</h3>
-             <p className={styles.cardText}>Providing practical legal training to empower individuals and professionals.Fostering innovation in law and technology through hackathon events.</p>
+             <p className={styles.cardText}>Providing practical legal training to empower individuals and professionals.</p>
              {/* Based on item from: */}
           </div>
 
