@@ -2,43 +2,69 @@
 
 .awardsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust minmax */
-  gap: 1.5rem;
-  max-width: 900px; /* Limit max width */
-  margin: 0 auto; /* Center grid */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider min width */
+  gap: 2rem; /* Increased gap */
+  max-width: 950px; /* Slightly wider max width */
+  margin: 2rem auto; /* More top/bottom margin */
 }
 
 .awardItem {
-  background-color: var(--light-bg-color);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  padding: 2rem; /* More padding */
+  border-radius: 15px; /* More rounded corners */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
   text-align: center;
-  transition: background-color 0.3s ease;
-  /* border-top: 4px solid var(--accent-color); */ /* Top accent */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
 }
 
 .awardItem:hover {
-  background-color: #e9ecef; /* Slight hover background */
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
 }
 
 .awardIcon {
-  font-size: 2rem; /* Adjust icon size */
-  color: var(--accent-color);
-  display: block; /* Make icon block element */
-  margin-bottom: 1rem;
+  font-size: 2.5rem; /* Larger icon */
+  color: var(--accent-color, #007bff); /* Use accent color or fallback */
+  display: block;
+  margin-bottom: 1.25rem;
 }
 
 .awardTitle {
-  /* Use global h3 */
-  color: var(--primary-color);
-  font-size: 1.25rem; /* Adjust size */
-  margin-bottom: 0.5rem;
+  color: var(--primary-color, #333); /* Use primary color or fallback */
+  font-size: 1.3rem;
+  font-weight: 600; /* Slightly bolder */
+  margin-bottom: 0.75rem;
 }
 
-.awardDetail {
-  font-size: 0.9rem; /* Smaller text for details */
-  color: var(--text-color-muted);
-  line-height: 1.6;
-  margin-bottom: 0;
+.awardDetail,
+.awardRandomInfo {
+  font-size: 0.95rem;
+  color: #6c757d; /* Light grey text color */
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.readMoreBtn {
+  background-color: transparent;
+  color: #6c757d; /* Same light grey color */
+  border: 2px solid #6c757d; /* Matching border */
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px; /* Curved shape */
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.readMoreBtn:hover {
+  background-color: var(--accent-color, #007bff);
+  color: white;
+  border-color: var(--accent-color, #007bff);
+}
+
+.awardRandomInfo {
+  margin-top: 1.25rem;
 }
