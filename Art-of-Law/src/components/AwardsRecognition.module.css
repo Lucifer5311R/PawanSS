@@ -68,17 +68,17 @@
 
 .awardDetail {
   font-size: 0.8rem;
-  color: #495057; /* Slightly darker text color for detail */
+  color: #343a40; /* Even darker grey for detail */
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
 
 .awardRandomInfo {
   font-size: 0.8rem;
-  color: #6c757d; /* Lighter text color for random info */
+  color: #6c757d; /* Lighter grey for random info */
   line-height: 1.4;
   margin-bottom: 0.5rem;
-  margin-top: 0; /* Remove top margin to be closer to detail if needed */
+  margin-top: 0;
 }
 
 .readMoreBtn {
