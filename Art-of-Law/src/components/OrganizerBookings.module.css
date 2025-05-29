@@ -88,8 +88,8 @@
 }
 
 /* Status Colors (match MyBookings or define specific ones) */
-.statusConfirmed { background-color: #28a745; }
-.statusPending_payment { background-color: #ffc107; color: #333 !important; }
+.status-confirmed { background-color: #28a745; }
+.status-pending_payment { background-color: #ffc107; color: #333 !important; }
 .statusCancelled_by_user,
 .statusCancelled_by_organizer { background-color: #dc3545; }
 .statusCompleted { background-color: #6c757d; }

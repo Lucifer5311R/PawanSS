@@ -1,7 +1,6 @@
-// ## File: src/components/InitiativesList.jsx (Using CSS Modules)
-
-
+// src/components/InitiativesList.jsx
 import React from 'react';
+<<<<<<< HEAD
 import styles from './InitiativesList.module.css'; // Import the CSS Module
 
 
@@ -10,6 +9,14 @@ import styles from './InitiativesList.module.css'; // Import the CSS Module
 // Option 2: Use an icon library (e.g., react-icons, lucide-react) - Recommended
 const PlaceholderIcon = () => <span style={{ marginRight: '8px', color: 'var(--secondary-color)' }}>&#9733;</span>; // Example star
 
+=======
+import styles from './InitiativesList.module.css'; // Import the CSS Module for InitiativesList
+import { Link } from 'react-router-dom';
+import { initiativeDetails } from './initiativeData'; // Import data from the new file
+
+// Placeholder for icons - replace with actual icons later
+const PlaceholderIcon = () => <span style={{ marginRight: '8px', color: 'var(--secondary-color)' }}>&#9733;</span>;
+>>>>>>> 320d3d4760341f91ac7654051822043a62cbbc90
 
 function InitiativesList() {
   return (
@@ -19,6 +26,7 @@ function InitiativesList() {
 
 
         <div className={styles.initiativesGrid}>
+<<<<<<< HEAD
 
 
           {/* Initiative Card 1 */}
@@ -76,11 +84,28 @@ function InitiativesList() {
            </div>
 
 
+=======
+          {Object.keys(initiativeDetails).map((title) => (
+            <Link
+              to={`/initiative/${title.replace(/\s+/g, '-').toLowerCase()}`} // URL-friendly names
+              key={title}
+              className={styles.initiativeCard}
+            >
+              {/* <PlaceholderIcon /> Replace with actual Icon component */}
+              <h3 className={styles.cardTitle}>{title}</h3>
+              <p className={styles.cardText}>{initiativeDetails[title].description.substring(0, 80)}...</p>
+            </Link>
+          ))}
+>>>>>>> 320d3d4760341f91ac7654051822043a62cbbc90
         </div>
       </div>
     </section>
   );
 }
 
+<<<<<<< HEAD
 
 export default InitiativesList;
+=======
+export default InitiativesList;
+>>>>>>> 320d3d4760341f91ac7654051822043a62cbbc90
