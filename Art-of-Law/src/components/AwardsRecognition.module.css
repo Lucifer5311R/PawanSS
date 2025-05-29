@@ -68,7 +68,7 @@
 
 .awardDetail {
   font-size: 0.8rem;
-  color: #343a40; /* Even darker grey for detail */
+  color: #212529; /* Even darker, almost black grey */
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
