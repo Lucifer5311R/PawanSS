@@ -13,12 +13,12 @@ function AwardsRecognition() {
     {
       id: 1,
       title: 'Millennium Ocean Prize',
-      detail: 'Recognized by UNAI for Jalamitra Project’s innovative work in environmental law.',
+      detail: 'Recognized by UNAI for Jalamitra Projects innovative work in environmental law.',
       randomInfo: 'This prestigious award highlights the project\'s global impact on marine conservation and policy innovation. It was presented at a high-level UN conference.',
     },
     {
       id: 2,
-      title: 'Project Nyayam – UNAI',
+      title: 'Project Nyayam  UNAI',
       detail: 'UNAI recognition for impactful legal initiatives.',
       randomInfo: 'Project Nyayam received this recognition for its contributions to promoting justice and the rule of law.',
     },
