@@ -35,7 +35,7 @@ function Contact() {
              {/* Ideally use icons here */}
             <p>
               {/* <Icon/> */}
-               <strong>Email:</strong> <a href="mailto:info@artoflaw.example">info@artoflaw.example</a>
+               <strong>Email:</strong> <a href="mailto:artoflaw.aol@gmail.com">artoflaw.aol@gmail.com</a>
             </p>
             {/* <p><strong>Phone:</strong> <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a></p> */}
             {/* <p><strong>Location:</strong> Bengaluru, Karnataka, India</p> */}
