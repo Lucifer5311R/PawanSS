@@ -1,62 +1,82 @@
 /* ## File: src/components/AwardsRecognition.module.css */
 
+.section {
+  padding-top: 2rem; /* Reduced top padding for the section */
+  padding-bottom: 2rem; /* Reduced bottom padding */
+}
+
+.container {
+  max-width: 1200px; /* Slightly wider container */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-title {
+  color: var(--primary-color, #333);
+  font-size: 1.75rem; /* Slightly smaller title */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem; /* Reduced bottom margin */
+}
+
 .awardsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider min width */
-  gap: 2rem; /* Increased gap */
-  max-width: 950px; /* Slightly wider max width */
-  margin: 2rem auto; /* More top/bottom margin */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* More compact min width */
+  gap: 1rem; /* Reduced gap */
+  max-width: 100%; /* Use full container width */
+  margin-top: 1rem;
 }
 
 .awardItem {
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
-  padding: 2rem; /* More padding */
-  border-radius: 15px; /* More rounded corners */
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+  background-color: rgba(255, 255, 255, 0.85); /* Slightly more transparent */
+  padding: 1rem; /* Reduced padding */
+  border-radius: 10px; /* Slightly less rounded */
+  border: 1px solid rgba(0, 0, 0, 0.08);
   text-align: center;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content horizontally */
+  align-items: center;
 }
 
 .awardItem:hover {
-  transform: translateY(-5px); /* Slight lift on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .awardIcon {
-  font-size: 2.5rem; /* Larger icon */
-  color: var(--accent-color, #007bff); /* Use accent color or fallback */
+  font-size: 2rem; /* Slightly smaller icon */
+  color: var(--accent-color, #007bff);
   display: block;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.6rem; /* Reduced margin */
 }
 
 .awardTitle {
-  color: var(--primary-color, #333); /* Use primary color or fallback */
-  font-size: 1.3rem;
-  font-weight: 600; /* Slightly bolder */
-  margin-bottom: 0.75rem;
+  color: var(--primary-color, #333);
+  font-size: 1.1rem; /* Smaller title */
+  font-weight: 600;
+  margin-bottom: 0.3rem; /* Reduced margin */
 }
 
 .awardDetail,
 .awardRandomInfo {
-  font-size: 0.95rem;
-  color: #6c757d; /* Light grey text color */
-  line-height: 1.7;
-  margin-bottom: 1rem;
+  font-size: 0.8rem; /* Smaller detail text */
+  color: #6c757d;
+  line-height: 1.4; /* More compact line height */
+  margin-bottom: 0.5rem; /* Reduced margin */
 }
 
 .readMoreBtn {
   background-color: transparent;
-  color: #6c757d; /* Same light grey color */
-  border: 2px solid #6c757d; /* Matching border */
-  padding: 0.6rem 1.5rem;
-  border-radius: 20px; /* Curved shape */
+  color: #6c757d;
+  border: 1.5px solid #6c757d; /* Thinner border */
+  padding: 0.4rem 1rem; /* Smaller padding */
+  border-radius: 15px; /* Less rounded */
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-size: 0.75rem; /* Smaller button text */
+  margin-top: 0.5rem; /* Reduced margin */
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .readMoreBtn:hover {
@@ -66,5 +86,5 @@
 }
 
 .awardRandomInfo {
-  margin-top: 1.25rem;
+  margin-top: 0.75rem; /* Reduced margin */
 }
