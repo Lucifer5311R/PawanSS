@@ -14,7 +14,7 @@ function AwardsRecognition() {
       id: 1,
       title: 'Millennium Ocean Prize',
       detail: 'Recognized by UNAI for Jalamitra Projects innovative work in environmental law.',
-      randomInfo: 'This prestigious award highlights the project\'s global impact on marine conservation and policy innovation. It was presented at a high-level UN conference.',
+      randomInfo: 'This prestigious award highlights the projects global impact on marine conservation and policy innovation. It was presented at a high-level UN conference.',
     },
     {
       id: 2,
