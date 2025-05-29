@@ -23,7 +23,7 @@ Pawan's professional journey is marked by a strong commitment to research-driven
 
 With a vision to create lasting legal and environmental impact, Advocate Pawan SS continues to drive change, empower communities, and influence policy through strategic advocacy, research, and leadership.`,
     image: '/images/pawan-ss.jpg', // Make sure this path is correct
-    social: { linkedin: 'https://www.linkedin.com/in/psenvironmental/', email: 'artoflaw.aol@gmail.com' } // Example actual links
+    social: { linkedin: 'https://www.linkedin.com/in/pawanss/', email: 'artoflaw.aol@gmail.com' } // Example actual links
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ In addition to his academic and professional achievements, Kamal has completed i
 Advocate Kamal Adithya K's unwavering dedication to the legal profession, combined with his academic rigor, practical experience, and passion for justice, positions him as a promising and impactful legal professional. His strong foundation in both theoretical and applied aspects of law, coupled with his commitment to addressing societal challenges, makes him a valuable asset to the legal community and a champion for equitable access to justice.
 `,
     image: '/images/kamal-k.jpg', // Make sure this path is correct
-    social: { linkedin: 'https://www.linkedin.com/in/kamaladithyak', email: 'artoflaw.aol@gmail.com' } // Example actual links
+    social: { linkedin: 'https://www.linkedin.com/in/kamal-adithya-k-4974b7211/', email: 'artoflaw.aol@gmail.com' } // Example actual links
   },
 ];
 
