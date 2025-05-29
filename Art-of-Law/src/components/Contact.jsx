@@ -59,21 +59,21 @@ function Contact() {
               <div className={styles.donationOptions}>
                 <button 
                   className={`${styles.donationButton} ${consultationType === 'basic' ? styles.selected : ''}`}
-                  onClick={() => handleConsultationTypeChange('basic', 5000)}
+                  onClick={() => handleConsultationTypeChange('basic', 500)}
                 >
-                  Basic Consultation<br /><span className={styles.feeAmount}>₹5,000</span>
+                  Basic Consultation<br /><span className={styles.feeAmount}>₹5,00</span>
                 </button>
                 <button 
                   className={`${styles.donationButton} ${consultationType === 'standard' ? styles.selected : ''}`}
-                  onClick={() => handleConsultationTypeChange('standard', 7500)}
+                  onClick={() => handleConsultationTypeChange('standard', 1500)}
                 >
-                  Standard Consultation<br /><span className={styles.feeAmount}>₹7,500</span>
+                  Standard Consultation<br /><span className={styles.feeAmount}>₹1,500</span>
                 </button>
                 <button 
                   className={`${styles.donationButton} ${consultationType === 'comprehensive' ? styles.selected : ''}`}
-                  onClick={() => handleConsultationTypeChange('comprehensive', 12500)}
+                  onClick={() => handleConsultationTypeChange('comprehensive', 2500)}
                 >
-                  Comprehensive Consultation<br /><span className={styles.feeAmount}>₹12,500</span>
+                  Comprehensive Consultation<br /><span className={styles.feeAmount}>2,500</span>
                 </button>
                 <button 
                   className={styles.donateNowButton}
