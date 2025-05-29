@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState, useEffect } from 'react'; // Added useEffect
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, Link } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
@@ -9,7 +9,8 @@ import OrganizerBookings from './components/OrganizerBookings';
 import SlotBooking from './components/SlotBooking';
 import OrganizerAvailability from './components/OrganizerAvailability';
 import InitiativeDetails from './components/InitiativeDetails';
-import DisclaimerModal from './components/DisclaimerModal'; // <<<--- ADD THIS IMPORT
+import DisclaimerModal from './components/DisclaimerModal';
+import CareersPage from './components/CareersPage'; // <<<--- ADD THIS IMPORT
 
 import { AuthProvider, useAuth } from './AuthContext.jsx';
 import './index.css';
@@ -33,20 +34,20 @@ const OrganizerProtectedRoute = () => {
 function AppContent() {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [formType, setFormType] = useState('login');
-  const [showDisclaimer, setShowDisclaimer] = useState(false); // <<<--- NEW STATE
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
 
   useEffect(() => {
     const disclaimerAccepted = localStorage.getItem('disclaimerAccepted');
     if (disclaimerAccepted !== 'true') {
       setShowDisclaimer(true);
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+      document.body.style.overflow = 'hidden';
     }
   }, []);
 
   const handleAgreeToDisclaimer = () => {
     localStorage.setItem('disclaimerAccepted', 'true');
     setShowDisclaimer(false);
-    document.body.style.overflow = ''; // Restore scrolling
+    document.body.style.overflow = '';
   };
 
   const toggleLoginModal = (type = 'login', show = true) => {
@@ -65,6 +66,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage heroProps={heroModalProps} />} />
         <Route path="/initiative/:initiativeName" element={<InitiativeDetails />} />
+        <Route path="/careers" element={<CareersPage />} /> {/* <<<--- ADD THIS ROUTE */}
 
         <Route element={<UserProtectedRoute />}>
           <Route path="/my-bookings" element={<MyBookings />} />

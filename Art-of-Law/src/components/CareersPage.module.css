@@ -1,0 +1,149 @@
+/* src/components/CareersPage.module.css */
+.careersPageContainer {
+  padding-top: 60px; /* Initial space for fixed navbar, header will push further */
+  overflow-x: hidden; /* Prevent horizontal scrollbars from animations */
+}
+
+/* Enhanced Page Header */
+.pageHeader {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white-color);
+  padding: 4rem 1rem 3rem 1rem; /* Generous padding */
+  text-align: center;
+  margin-bottom: 3rem; /* Space before the first subsection */
+  position: relative; /* For potential pseudo-elements or layered effects later */
+}
+
+.pageTitle {
+  font-family: var(--font-family-serif);
+  font-size: clamp(2.5rem, 6vw, 4rem); /* Larger, responsive title */
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem !important;
+  color: var(--white-color); /* Ensure title is white on gradient */
+  padding-top: 0; /* Reset padding from global */
+}
+.pageTitle::after {
+  display: none; /* Remove global underline for this specific title style */
+}
+.pageTitle span {
+  display: block; /* Each part of title on new line */
+}
+
+.introContent {
+  max-width: 750px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for softer look */
+}
+
+.introContent p {
+  color: inherit; /* Inherit color from parent */
+}
+
+
+/* Animation Base Styles */
+.animatedElement {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animatedElement.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Delays */
+.pageTitle.animatedElement.visible span:first-child {
+  animation: fadeInSlideUp 0.7s 0.2s ease-out forwards;
+}
+.pageTitle.animatedElement.visible span:last-child {
+  animation: fadeInSlideUp 0.7s 0.4s ease-out forwards;
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.delay1.visible { transition-delay: 0.3s; }
+.delay2.visible { transition-delay: 0.4s; }
+/* Add more .delayX classes if needed for more staggered items */
+
+
+/* Wrapper for subsections for applying observer easily */
+.subSectionWrapper {
+  margin-bottom: 2rem; /* Space between subsections */
+}
+.subSectionWrapper:last-of-type {
+  margin-bottom: 0;
+}
+
+
+/* Visual Separator (Optional) */
+.sectionSeparator {
+  height: 1px;
+  background-color: var(--border-color);
+  max-width: 80%;
+  margin: 3rem auto; /* Increased margin for more breathing room */
+  opacity: 0.5;
+}
+
+
+/* General Career Info (already styled in previous response, slight adjustment if needed) */
+.generalCareerInfo {
+  max-width: 800px;
+  margin: 3rem auto 3rem auto; /* Consistent vertical spacing */
+  padding: 2.5rem; /* Slightly more padding */
+  background-color: var(--white-color); /* Ensure background if not default */
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Softer shadow */
+  text-align: center;
+}
+
+.generalCareerInfo h2 {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-family: var(--font-family-serif);
+}
+
+.generalCareerInfo p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color-dark);
+}
+
+.generalCareerInfo a {
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+.generalCareerInfo a:hover {
+  color: var(--primary-color);
+}
+
+/* Ensure subsection titles within ProjectNyay and InternSection are styled appropriately.
+   The .subSectionTitle classes provided in their respective CSS files should handle this.
+   Example from ProjectNyay.module.css:
+    .subSectionTitle {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2rem);
+      color: var(--primary-color);
+      margin-bottom: 2rem !important;
+    }
+    .subSectionTitle::after {
+      content: ''; display: block; width: 50px; height: 2px;
+      background-color: var(--accent-color); margin: 0.5rem auto 0;
+    }
+*/
