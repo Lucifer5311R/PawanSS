@@ -1,0 +1,96 @@
+/* src/components/DisclaimerModal.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75); /* Darker overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* Ensure it's above other content like navbar */
+  padding: 1rem;
+}
+
+.modalContent {
+  background-color: var(--white-color, #fff);
+  padding: 2rem 2.5rem;
+  border-radius: var(--border-radius, 8px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 650px; /* Max width for the modal */
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: left;
+  color: var(--text-color-dark);
+  border-top: 5px solid var(--primary-color);
+}
+
+.modalLogo {
+  display: block;
+  max-height: 60px; /* Adjust as needed */
+  width: auto;
+  margin: 0 auto 1.5rem auto;
+}
+
+.modalContent h2 {
+  font-family: var(--font-family-serif);
+  color: var(--primary-color);
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.disclaimerIntro {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: var(--text-color-muted);
+  text-align: center;
+}
+
+.disclaimerList {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem; /* Indent list items */
+}
+
+.disclaimerList li {
+  margin-bottom: 0.8rem;
+}
+
+.agreeButton {
+  display: block;
+  width: 100%;
+  max-width: 200px; /* Button max width */
+  margin: 1rem auto 0 auto; /* Center button */
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase;
+}
+
+.agreeButton:hover {
+  background-color: var(--secondary-color); /* Or a darker primary */
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .modalContent {
+    padding: 1.5rem;
+  }
+  .modalContent h2 {
+    font-size: 1.5rem;
+  }
+  .disclaimerIntro, .disclaimerList {
+    font-size: 0.85rem;
+  }
+}

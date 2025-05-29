@@ -21,7 +21,7 @@
   padding: 0.6rem 0;
 }
 
-.navbar.menuActiveBackground { /* When mobile menu is open, ensure navbar has background */
+.navbar.menuActiveBackground { /* When mobile menu or dropdown is open, ensure navbar has background */
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -64,7 +64,8 @@
   gap: 1.5rem; /* Spacing between links */
 }
 
-.navLinksDesktop a {
+.navLinksDesktop a,
+.mobileNavLink { /* Generic style for nav links */
   font-family: var(--font-family-sans);
   font-size: 0.88rem; /* Elegant, readable size */
   font-weight: 500;
@@ -86,7 +87,8 @@
   transition: width 0.3s ease;
 }
 
-.navLinksDesktop a:hover {
+.navLinksDesktop a:hover,
+.mobileNavLink:hover {
   color: var(--primary-color);
 }
 
@@ -97,30 +99,126 @@
 .navActions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem; /* Reduced gap slightly as one button is removed */
 }
 
-.navButton { /* Base style for buttons in nav */
+/* Account Icon Button */
+.accountMenuContainer {
+  position: relative;
+}
+
+.accountIconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  position: relative; /* For the indicator dot */
+}
+.accountIconButton:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+.accountIconSVG {
+  width: 22px;
+  height: 22px;
+  stroke: var(--text-color-dark, #333);
+  transition: stroke 0.3s ease;
+}
+.navbar.scrolled .accountIconSVG {
+  stroke: var(--text-color-dark, #222);
+}
+.currentUserIndicatorDot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 7px;
+  height: 7px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+
+/* Account Dropdown Menu */
+.accountDropdown {
+  position: absolute;
+  top: calc(100% + 10px); /* Position below the icon */
+  right: 0;
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  z-index: 1010; /* Above other nav content */
+  min-width: 200px;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  animation: fadeInDropdown 0.2s ease-out;
+  border: 1px solid var(--border-color);
+}
+
+@keyframes fadeInDropdown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdownHeader {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color-dark);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0.5rem;
+}
+
+.accountDropdownItemLink,
+.accountDropdownButton {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-color-muted);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.accountDropdownItemLink:hover,
+.accountDropdownButton:hover {
+  background-color: var(--light-bg-color);
+  color: var(--primary-color);
+}
+
+
+/* Nav Button (used for mobile menu Login/Register/Logout) */
+.navButton {
   font-family: var(--font-family-sans);
   font-size: 0.85rem;
   font-weight: 500;
-  padding: 0.5rem 1rem; /* Standard padding */
-  border-radius: 5px; /* Subtle radius */
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid transparent;
 }
-
+/* This class was previously for desktop login/register, now primarily for mobile buttons if needed */
 .loginRegisterBtn {
   background-color: transparent;
   color: var(--primary-color);
-  border: 1px solid var(--primary-color); /* Outline style */
+  border: 1px solid var(--primary-color);
 }
 .loginRegisterBtn:hover {
   background-color: var(--primary-color);
   color: var(--white-color);
   box-shadow: 0 2px 8px rgba(var(--primary-color-rgb), 0.15);
 }
+
 
 .menuToggle {
   display: none; /* Hidden on desktop */
@@ -162,11 +260,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.8rem; /* Spacing for menu items */
+  gap: 1.2rem; /* Adjusted Spacing for menu items */
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px); /* Subtle entry animation */
   transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease;
+  padding-top: 60px; /* Account for fixed navbar height */
+  box-sizing: border-box;
 }
 
 .navMenuMobileOverlay.active {
@@ -176,28 +276,40 @@
   transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease;
 }
 
-.navMenuMobileOverlay a,
+.mobileNavLink, /* Applied generic style above */
 .navMenuMobileOverlay .loginRegisterBtnMobile {
   font-family: var(--font-family-sans);
-  font-size: 1.3rem; /* Larger, touch-friendly text */
+  font-size: 1.2rem; /* Larger, touch-friendly text */
   font-weight: 500;
   color: var(--text-color-dark);
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 1rem;
   opacity: 0;
   transform: translateY(10px);
   animation: fadeInMenuItemMobile 0.4s ease forwards;
+  display: block; /* Ensure links take full width for centering */
+  text-align: center;
+}
+.mobileMenuUserGreeting {
+    font-size: 1rem;
+    color: var(--text-color-muted);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInMenuItemMobile 0.4s ease forwards;
+    animation-delay: 0.05s; /* Slight delay */
 }
 
 /* Staggered animation for mobile menu items */
-.navMenuMobileOverlay.active a:nth-child(1) { animation-delay: 0.1s; }
-.navMenuMobileOverlay.active a:nth-child(2) { animation-delay: 0.15s; }
-.navMenuMobileOverlay.active a:nth-child(3) { animation-delay: 0.2s; }
-.navMenuMobileOverlay.active a:nth-child(4) { animation-delay: 0.25s; }
-.navMenuMobileOverlay.active a:nth-child(5) { animation-delay: 0.3s; }
+.navMenuMobileOverlay.active .mobileNavLink:nth-child(1) { animation-delay: 0.1s; }
+.navMenuMobileOverlay.active .mobileNavLink:nth-child(2) { animation-delay: 0.15s; }
+.navMenuMobileOverlay.active .mobileNavLink:nth-child(3) { animation-delay: 0.2s; }
+.navMenuMobileOverlay.active .mobileNavLink:nth-child(4) { animation-delay: 0.25s; }
+.navMenuMobileOverlay.active .mobileNavLink:nth-child(5) { animation-delay: 0.3s; } /* for any subsequent links */
+
 .navMenuMobileOverlay.active .loginRegisterBtnMobile {
   animation-delay: 0.35s;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   border-color: var(--primary-color); /* Ensure it's styled like desktop */
   color: var(--primary-color);
   background-color: transparent;
@@ -226,6 +338,12 @@
   .navContainer {
     padding: 0 1.5rem; /* Adjust padding for smaller screens */
   }
+  .accountIconButton { /* Make account icon slightly more prominent if needed */
+    /* padding: 0.6rem; */
+  }
+  .accountIconSVG {
+    /* width: 24px; height: 24px; */
+  }
 }
 
 @media (max-width: 480px) { /* Small mobile */
@@ -235,13 +353,12 @@
   .logo {
     height: 28px;
   }
-  .loginRegisterBtn { /* Hide desktop login button if it feels too crowded */
-    /* display: none; */ /* Or make it smaller */
-    font-size: 0.75rem;
-    padding: 0.4rem 0.8rem;
-  }
-  .menuIconSVG {
+  .menuIconSVG, .accountIconSVG { /* Smaller icons */
     width: 20px;
     height: 20px;
+  }
+  .accountDropdown { /* Ensure dropdown doesn't go off-screen */
+    min-width: 180px;
+    /* Consider adjustments if it's too wide for very small screens */
   }
 }

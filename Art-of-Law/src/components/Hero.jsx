@@ -1,8 +1,10 @@
 // src/components/Hero.jsx
 import React, { useEffect, useState, useCallback } from 'react';
-import styles from './Hero.module.css'; //
-import BrandLogo from '/images/Logo.png'; // Ensure path is correct from public folder
-import { useAuth } from '../AuthContext.jsx'; // Path to your AuthContext
+import styles from './Hero.module.css';
+import BrandLogo from '/images/Logo.png';
+import { useAuth } from '../AuthContext.jsx';
+// Removed useNavigate as the primary action button for logged-in users is removed from Hero
+// If you add other navigation actions, you might need it back.
 
 // Thematic award card data
 const awardData = [
@@ -11,7 +13,7 @@ const awardData = [
   { id: 3, title: 'Insight', icon: '💡' },
 ];
 
-// Case types (as provided by you)
+// Case types (as provided by you) - Kept for the modal, if the modal is triggered elsewhere
 const caseTypes = [
     { category: "Criminal Law", subcases: ["Theft / Robbery / Burglary", "Murder / Attempt to Murder", "Assault / Bodily Harm", "Sexual Offenses", "Cyber Crime", "Drug-Related Offenses", "Domestic Violence", "Bail Matters", "White Collar Crimes"] },
     { category: "Civil & Property Disputes", subcases: ["Property Ownership Disputes", "Landlord-Tenant Issues", "Contract Breach", "Personal Injury / Tort Claims", "Motor Accident Claims (MACT)", "Consumer Complaints", "Real Estate Disputes", "Injunction Applications"] },
@@ -24,12 +26,12 @@ const caseTypes = [
 
 function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
   const [cards, setCards] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(''); // For registration modal
+  const [loading, setLoading] = useState(false); // For modal form submission
+  const [error, setError] = useState(''); // For modal form error
+  const [successMessage, setSuccessMessage] = useState(''); // For modal form success
 
-  const { login } = useAuth(); // Get the login function from context
+  const { login } = useAuth(); // Only login needed if modal handled by Navbar now
 
   useEffect(() => {
     const generateCards = () => {
@@ -61,7 +63,6 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
     setShowLoginForm(false);
     setError('');
     setSuccessMessage('');
-    // Consider adding form reset logic here if inputs don't clear automatically
   }, [setShowLoginForm]);
 
   useEffect(() => {
@@ -83,18 +84,11 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
     };
   }, [showLoginForm, handleCloseModal]);
 
-  // This function is still useful if Navbar directly triggers the modal via App -> Hero props
-  const internalToggleFormDisplay = (type) => {
-    setFormType(type);
-    setShowLoginForm(true);
-    setError('');
-    setSuccessMessage('');
-  };
-
-  const handleCategoryChange = (e) => {
+  const handleCategoryChange = (e) => { // For registration modal
     setSelectedCategory(e.target.value);
   };
 
+  // Form submission logic for the modal (kept here as Hero still owns the modal's state via props)
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -116,20 +110,18 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
     } else { // register
       payload = {
         firstName: data.firstName, lastName: data.lastName, email: data.regEmail,
-        phone: data.phone, altPhone: data.altPhone || undefined, // Send undefined if empty for optional fields
+        phone: data.phone, altPhone: data.altPhone || undefined,
         street: data.street, city: data.city, state: data.state, zip: data.zip,
         country: data.country || 'India', dob: data.dob || null,
-        gender: data.gender || undefined, occupation: data.occupation || undefined, 
+        gender: data.gender || undefined, occupation: data.occupation || undefined,
         govtId: data.govtId || undefined,
-        password: data.regPassword, 
-        // confirmPassword is only for frontend check, not usually sent if backend doesn't need it explicitly
-        // However, your authController.registerUser expects it, so we send it.
-        confirmPassword: data.confirmPassword 
+        password: data.regPassword,
+        confirmPassword: data.confirmPassword
       };
     }
 
     const endpoint = formType === 'login' ? '/api/auth/login' : '/api/auth/register';
-    const backendUrl = 'https://art-of-law.onrender.com'; // Ensure this is your backend URL
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://art-of-law.onrender.com';
 
     try {
       const response = await fetch(`${backendUrl}${endpoint}`, {
@@ -137,25 +129,19 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      const result = await response.json(); // Always try to parse JSON
+      const result = await response.json();
 
       if (response.ok && result.status === 'success') {
-        // Use the login function from AuthContext to update global state and localStorage
         login(result.data.user, result.token);
-
         setSuccessMessage(formType === 'login' ? 'Login successful! Closing modal...' : 'Registration successful! Closing modal...');
         setTimeout(() => {
           handleCloseModal();
-          // Optional: navigate to a dashboard page after successful login/registration
-          // const navigate = useNavigate(); // Would need to import this
-          // navigate(formType === 'login' ? '/my-bookings' : '/');
-        }, 1500); // Shorter delay
+        }, 1500);
       } else {
         setError(result.message || `An error occurred during ${formType}.`);
       }
     } catch (err) {
       console.error(`Error during ${formType}:`, err);
-      // Check if err.message already exists, otherwise provide a generic one
       setError(err.message || `Network error or server is not responding. Please try again.`);
     } finally {
       setLoading(false);
@@ -164,7 +150,6 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
 
   return (
     <section id="hero" className={styles.heroSection}>
-      {/* Background Cards */}
       <div className={styles.cardsBackground}>
         {cards.map((card) => (
           <div key={card.uniqueId} className={styles.backgroundCard} style={card.style}>
@@ -173,7 +158,6 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
         ))}
       </div>
 
-      {/* Hero Content */}
       <div className={styles.heroContentGrid}>
         <div className={styles.heroTextPane}>
           <h1 className={styles.heroTitle}>Art of Law</h1>
@@ -186,14 +170,7 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
           <div className={styles.heroActions}>
             <a href="/#initiatives" className={`btn btn-primary ${styles.heroBtn}`}>Explore Initiatives</a>
             <a href="/#contact" className={`btn btn-outline ${styles.heroBtn}`}>Contact Us</a>
-            {/* This button in Hero can still trigger the modal directly if needed, 
-                Navbar also triggers it via onToggleLoginModal prop passed through App */}
-            <button
-              onClick={() => internalToggleFormDisplay('login')}
-              className={`btn btn-accent ${styles.heroBtn} ${styles.loginBtn}`}
-            >
-              Login / Register
-            </button>
+            {/* Login/Register button removed from here as it's now in Navbar account dropdown */}
           </div>
         </div>
         <div className={styles.heroDivider}></div>
@@ -202,20 +179,20 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
         </div>
       </div>
 
-      {/* Login/Registration Modal */}
+      {/* Login/Registration Modal (still controlled by Hero via props from App) */}
       {showLoginForm && (
-         <div className={styles.modalOverlay} onClick={(e) => { if(e.target === e.currentTarget) handleCloseModal(); /* Close on overlay click */}}>
+         <div className={styles.modalOverlay} onClick={(e) => { if(e.target === e.currentTarget) handleCloseModal(); }}>
            <div className={styles.formModal}>
              <button className={styles.closeBtn} onClick={handleCloseModal} aria-label="Close modal">&times;</button>
              <div className={styles.formTabs}>
-               <button 
-                 className={`${styles.tabBtn} ${formType === 'login' ? styles.activeTab : ''}`} 
+               <button
+                 className={`${styles.tabBtn} ${formType === 'login' ? styles.activeTab : ''}`}
                  onClick={() => { setFormType('login'); setError(''); setSuccessMessage(''); }}
                >
                  Login
                </button>
-               <button 
-                 className={`${styles.tabBtn} ${formType === 'register' ? styles.activeTab : ''}`} 
+               <button
+                 className={`${styles.tabBtn} ${formType === 'register' ? styles.activeTab : ''}`}
                  onClick={() => { setFormType('register'); setError(''); setSuccessMessage(''); }}
                >
                  Register
@@ -277,11 +254,10 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
                         <div className={styles.formGroup}><label htmlFor="regPassword">Password</label><input type="password" id="regPassword" name="regPassword" required autoComplete="new-password"/></div>
                         <div className={styles.formGroup}><label htmlFor="confirmPassword">Confirm Password</label><input type="password" id="confirmPassword" name="confirmPassword" required autoComplete="new-password"/></div>
                     </div>
-                    {/* Optional Fields from original Hero.jsx */}
                     <div className={styles.formGroup}> <label htmlFor="caseCategory">Case Type / Area of Interest (Optional)</label> <select id="caseCategory" name="caseCategory" value={selectedCategory} onChange={handleCategoryChange}> <option value="">Select Case Category</option> {caseTypes.map((type) => <option key={type.category} value={type.category}>{type.category}</option>)} </select> </div>
                     {selectedCategory && ( <div className={styles.formGroup}> <label htmlFor="subcase">Specific Case Type (Optional)</label> <select id="subcase" name="subcase"> <option value="">Select Specific Case Type</option> {caseTypes.find(type => type.category === selectedCategory)?.subcases.map((subcase) => <option key={subcase} value={subcase}>{subcase}</option>)} </select> </div> )}
                     <div className={styles.formGroup}> <label htmlFor="referral">How Did You Hear About Us? (Optional)</label> <select id="referral" name="referral"><option value="">Select Option</option><option value="search">Search Engine</option><option value="social">Social Media</option><option value="friend">Friend/Family</option><option value="event">Event/Workshop</option><option value="advertisement">Advertisement</option><option value="other">Other</option></select> </div>
-                    
+
                     <div className={styles.formGroup}>
                         <div className={styles.checkboxGroup}><input type="checkbox" id="terms" name="terms" required /><label htmlFor="terms">I agree to the Terms and Conditions</label></div>
                     </div>
@@ -290,12 +266,10 @@ function Hero({ showLoginForm, formType, setShowLoginForm, setFormType }) {
                     </button>
                 </form>
              )}
-             
            </div>
          </div>
       )}
     </section>
   );
 }
-
 export default Hero;

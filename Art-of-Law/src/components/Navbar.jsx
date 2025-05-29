@@ -1,10 +1,17 @@
 // src/components/Navbar.jsx
-// ... (imports remain the same)
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
-import logoIcon from '/images/Logo.png'; 
+import logoIcon from '/images/Logo.png';
 import { useAuth } from '../AuthContext.jsx';
+
+// Simple User Icon (SVG) - You can replace this with a more sophisticated one
+const UserIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.accountIconSVG}>
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+    <circle cx="12" cy="7" r="4"></circle>
+  </svg>
+);
 
 const MenuIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.menuIconSVG}>
@@ -25,11 +32,15 @@ const CloseIcon = () => (
 function Navbar({ onToggleLoginModal }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
   const { isLoggedIn, logout, currentUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const accountDropdownRef = useRef(null);
+  const accountIconRef = useRef(null);
 
   const toggleMenu = useCallback(() => setIsMenuOpen(prev => !prev), []);
+  const toggleAccountDropdown = useCallback(() => setIsAccountDropdownOpen(prev => !prev), []);
 
   const handleScroll = useCallback(() => setIsScrolled(window.scrollY > 20), []);
 
@@ -39,32 +50,62 @@ function Navbar({ onToggleLoginModal }) {
   }, [handleScroll]);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    // Prevent body scroll when mobile menu or account dropdown is open
+    if (isMenuOpen || isAccountDropdownOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
     return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isAccountDropdownOpen]);
+
+  // Close account dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isAccountDropdownOpen &&
+          accountDropdownRef.current &&
+          !accountDropdownRef.current.contains(event.target) &&
+          accountIconRef.current && // ensure account icon ref exists
+          !accountIconRef.current.contains(event.target) // don't close if clicking the icon itself
+         ) {
+        setIsAccountDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isAccountDropdownOpen]);
+
 
   const handleNavClick = (path, type) => {
     setIsMenuOpen(false); // Close mobile menu on any navigation
+    setIsAccountDropdownOpen(false); // Close account dropdown
     if (type === 'hash') {
       if (location.pathname !== '/') {
-        navigate('/'); 
-        setTimeout(() => { 
-          const elementId = path.substring(2); 
+        navigate('/');
+        setTimeout(() => {
+          const elementId = path.substring(path.startsWith('/#') ? 2 : 1);
           document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
-        }, 100); 
+        }, 100);
       } else {
-        const elementId = path.substring(2); 
+        const elementId = path.substring(path.startsWith('/#') ? 2 : 1);
         document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
       }
-    } else { 
+    } else {
       navigate(path);
     }
   };
-  
+
   const handleLogout = () => {
-    logout(); 
+    logout();
+    setIsAccountDropdownOpen(false);
     setIsMenuOpen(false);
-    navigate('/'); 
+    navigate('/');
+  };
+
+  const handleLoginModalOpen = (type) => {
+    setIsAccountDropdownOpen(false);
+    setIsMenuOpen(false);
+    onToggleLoginModal(type, true);
   };
 
   const mainSectionLinks = [
@@ -72,57 +113,99 @@ function Navbar({ onToggleLoginModal }) {
     { path: "/#initiatives", label: "Initiatives", type: "hash" },
     { path: "/#recognition", label: "Recognition", type: "hash" },
     { path: "/#contact", label: "Contact", type: "hash" },
+    { path: "/#faq", label: "FAQ", type: "hash" },
   ];
 
-  const dashboardLinks = [];
-  if (isLoggedIn) {
-    dashboardLinks.push({ path: "/my-bookings", label: "My Bookings", type: "route" });
-    if (currentUser && (currentUser.role === 'organizer' || currentUser.role === 'admin')) {
-      dashboardLinks.push({ path: "/organizer-dashboard", label: "Organizer Dashboard", type: "route" });
-      dashboardLinks.push({ path: "/organizer-settings/availability", label: "Manage Availability", type: "route" }); // <<< NEW LINK
+  // Links for the main navbar (excluding account specific ones)
+  const navBarDisplayLinks = [...mainSectionLinks];
+  if (isLoggedIn && currentUser) {
+    if (currentUser.role !== 'organizer' && currentUser.role !== 'admin') {
+        // If you want "My Bookings" directly in the navbar for users, add it here.
+        // Otherwise, it will be in the account dropdown.
+        // navBarDisplayLinks.push({ path: "/my-bookings", label: "My Bookings", type: "route" });
+    }
+    if (currentUser.role === 'organizer' || currentUser.role === 'admin') {
+        // Similarly for organizer links if they should be top-level
+        // navBarDisplayLinks.push({ path: "/organizer-dashboard", label: "Dashboard", type: "route" });
     }
   }
-  const allNavLinks = [...mainSectionLinks, ...dashboardLinks];
 
-  const renderNavLink = (item, isMobile = false) => {
+
+  const renderNavLink = (item, isMobile = false, isDropdown = false) => {
     const clickHandler = () => handleNavClick(item.path, item.type);
-    const linkClass = isMobile ? styles.mobileNavLink : styles.desktopNavLink; // Assuming these classes exist
+    let linkClass;
+    if (isDropdown) {
+      linkClass = styles.accountDropdownItemLink;
+    } else if (isMobile) {
+      linkClass = styles.mobileNavLink;
+    } else {
+      linkClass = styles.desktopNavLink;
+    }
 
     if (item.type === "hash") {
-      // For hash links, ensure they are actual <a> tags if they are meant for same-page scrolling.
-      // If handleNavClick already correctly navigates and scrolls, Link might be fine too.
-      // Using <a> for direct hash behavior.
-      return <a key={item.path} href={item.path} onClick={(e) => { e.preventDefault(); clickHandler(); }} className={linkClass}>{item.label}</a>;
+      return <a key={item.label} href={item.path} onClick={(e) => { e.preventDefault(); clickHandler(); }} className={linkClass}>{item.label}</a>;
     }
-    // For route links, use React Router's Link component
-    return <Link key={item.path} to={item.path} onClick={clickHandler} className={linkClass}>{item.label}</Link>;
+    return <Link key={item.label} to={item.path} onClick={clickHandler} className={linkClass}>{item.label}</Link>;
   };
 
 
   return (
-    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isMenuOpen ? styles.menuActiveBackground : ''}`}>
+    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isMenuOpen || isAccountDropdownOpen ? styles.menuActiveBackground : ''}`}>
       <div className={styles.navContainer}>
-        <Link to="/" className={styles.logoLink} onClick={() => setIsMenuOpen(false)} aria-label="Art of Law Home">
+        <Link to="/" className={styles.logoLink} onClick={() => { setIsMenuOpen(false); setIsAccountDropdownOpen(false); }} aria-label="Art of Law Home">
           <img src={logoIcon} alt="Art of Law Icon" className={styles.logo} />
         </Link>
 
+        {/* Desktop Links */}
         <div className={styles.navLinksDesktop}>
-          {allNavLinks.map(item => renderNavLink(item, false))}
+          {navBarDisplayLinks.map(item => renderNavLink(item, false))}
         </div>
 
         <div className={styles.navActions}>
-          {isLoggedIn ? (
-            <>
-              {currentUser && <span style={{marginRight: '10px', color: isScrolled || isMenuOpen ? 'var(--text-color-dark)' : 'var(--text-color-muted)' }}>Hi, {currentUser.firstName}!</span>}
-              <button onClick={handleLogout} className={`${styles.navButton} ${styles.loginRegisterBtn}`}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <button onClick={() => { setIsMenuOpen(false); onToggleLoginModal('login', true); }} className={`${styles.navButton} ${styles.loginRegisterBtn}`}>
-              Login / Register
+          {/* Account Icon and Dropdown */}
+          <div className={styles.accountMenuContainer} ref={accountIconRef}>
+            <button
+              onClick={toggleAccountDropdown}
+              className={styles.accountIconButton}
+              aria-label="Account menu"
+              aria-expanded={isAccountDropdownOpen}
+            >
+              <UserIcon />
+              {isLoggedIn && currentUser && <span className={styles.currentUserIndicatorDot}></span>}
             </button>
-          )}
+            {isAccountDropdownOpen && (
+              <div className={styles.accountDropdown} ref={accountDropdownRef}>
+                {isLoggedIn && currentUser ? (
+                  <>
+                    <div className={styles.dropdownHeader}>Hi, {currentUser.firstName}!</div>
+                    {currentUser.role !== 'organizer' && currentUser.role !== 'admin' && (
+                      renderNavLink({ path: "/my-bookings", label: "My Bookings", type: "route" }, false, true)
+                    )}
+                    {(currentUser.role === 'organizer' || currentUser.role === 'admin') && (
+                      <>
+                        {renderNavLink({ path: "/organizer-dashboard", label: "Organizer Dashboard", type: "route" }, false, true)}
+                        {renderNavLink({ path: "/organizer-settings/availability", label: "Manage Availability", type: "route" }, false, true)}
+                      </>
+                    )}
+                    <button onClick={handleLogout} className={styles.accountDropdownButton}>
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button onClick={() => handleLoginModalOpen('login')} className={styles.accountDropdownButton}>
+                      Login
+                    </button>
+                    <button onClick={() => handleLoginModalOpen('register')} className={styles.accountDropdownButton}>
+                      Register
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Toggle */}
           <button
             className={styles.menuToggle}
             onClick={toggleMenu}
@@ -136,16 +219,34 @@ function Navbar({ onToggleLoginModal }) {
 
       {/* Mobile Overlay Menu */}
       <div id="mobileNavMenu" className={`${styles.navMenuMobileOverlay} ${isMenuOpen ? styles.active : ''}`}>
-        <Link to="/" className={styles.mobileNavLink} onClick={() => handleNavClick('/', 'route')}>Home</Link> {/* Added mobileNavLink class */}
-        {allNavLinks.map(item => renderNavLink(item, true))}
-        {isLoggedIn ? (
-          <button onClick={handleLogout} className={`${styles.navButton} ${styles.loginRegisterBtnMobile}`}>
-            Logout
-          </button>
+        <Link to="/" className={styles.mobileNavLink} onClick={() => handleNavClick('/', 'route')}>Home</Link>
+        {mainSectionLinks.map(item => renderNavLink(item, true))}
+        {/* Account links for mobile can be integrated here or kept separate */}
+        {isLoggedIn && currentUser ? (
+          <>
+            <div className={styles.mobileMenuUserGreeting}>Hi, {currentUser.firstName}!</div>
+            {currentUser.role !== 'organizer' && currentUser.role !== 'admin' && (
+              renderNavLink({ path: "/my-bookings", label: "My Bookings", type: "route" }, true)
+            )}
+            {(currentUser.role === 'organizer' || currentUser.role === 'admin') && (
+              <>
+                {renderNavLink({ path: "/organizer-dashboard", label: "Organizer Dashboard", type: "route" }, true)}
+                {renderNavLink({ path: "/organizer-settings/availability", label: "Manage Availability", type: "route" }, true)}
+              </>
+            )}
+            <button onClick={handleLogout} className={`${styles.navButton} ${styles.loginRegisterBtnMobile}`}>
+              Logout
+            </button>
+          </>
         ) : (
-          <button onClick={() => { setIsMenuOpen(false); onToggleLoginModal('login', true);}} className={`${styles.navButton} ${styles.loginRegisterBtnMobile}`}>
-            Login / Register
-          </button>
+          <>
+            <button onClick={() => handleLoginModalOpen('login')} className={`${styles.navButton} ${styles.loginRegisterBtnMobile}`}>
+              Login
+            </button>
+            <button onClick={() => handleLoginModalOpen('register')} className={`${styles.navButton} ${styles.loginRegisterBtnMobile}`}>
+              Register
+            </button>
+          </>
         )}
       </div>
     </nav>
