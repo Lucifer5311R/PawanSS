@@ -46,6 +46,14 @@ function AwardsRecognition() {
               {/* Mentioned in list: */}
           </div>
 
+          {/* Award Item 6 */}
+          <div className={styles.awardItem}>
+             <AwardIcon />
+            <h3 className={styles.awardTitle}>Highest Community Service Award</h3>
+            <p className={styles.awardDetail}>Recognition for outstanding coordination efforts (Context details pending).</p>
+              {/* Mentioned in list: */}
+          </div>
+
           {/* Award Item 3 */}
           <div className={styles.awardItem}>
              <AwardIcon />
@@ -55,13 +63,6 @@ function AwardsRecognition() {
             {/* Details from: */}
           </div>
 
-          {/* Award Item 6 */}
-          <div className={styles.awardItem}>
-             <AwardIcon />
-            <h3 className={styles.awardTitle}>Highest community service award</h3>
-            <p className={styles.awardDetail}>Recognition for outstanding coordination efforts (Context details pending).</p>
-              {/* Mentioned in list: */}
-          </div>
 
         </div>
       </div>
