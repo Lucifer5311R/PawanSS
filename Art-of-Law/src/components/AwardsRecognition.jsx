@@ -36,6 +36,7 @@ function AwardsRecognition() {
             <h3 className={styles.awardTitle}>Baazigar Recognition</h3>
             <p className={styles.awardDetail}>Specific recognition or award titled "Baazigar" (Context details pending).</p>
             {/* Mentioned in list: */}
+          </div>
 
            {/* Award Item 4 */}
           <div className={styles.awardItem}>
@@ -52,18 +53,15 @@ function AwardsRecognition() {
 
             <p className={styles.awardDetail}>Awarded to Pawan SS by CHRIST University School of Law for overall excellence.</p>
             {/* Details from: */}
-
           </div>
 
-          {/* Award Item 4 */}
+          {/* Award Item 6 */}
           <div className={styles.awardItem}>
              <AwardIcon />
             <h3 className={styles.awardTitle}>Highest community service award</h3>
             <p className={styles.awardDetail}>Recognition for outstanding coordination efforts (Context details pending).</p>
               {/* Mentioned in list: */}
           </div>
-
-         
 
         </div>
       </div>
