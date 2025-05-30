@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styles from './Contact.module.css'; // Import CSS Module
 import PaymentForm from './PaymentForm';
 // Optional: Import icons for social links
-// import { FaLinkedin, FaYoutube, FaInstagram } from 'react-icons/fa';
+import { FaLinkedin, FaYoutube, FaInstagram } from 'react-icons/fa';
 
 function Contact() {
   const [showPaymentForm, setShowPaymentForm] = useState(false);
@@ -37,16 +37,18 @@ function Contact() {
               {/* <Icon/> */}
                <strong>Email:</strong> <a href="mailto:artoflaw.aol@gmail.com">artoflaw.aol@gmail.com</a>
             </p>
-            {/* <p><strong>Phone:</strong> <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a></p> */}
-            {/* <p><strong>Location:</strong> Bengaluru, Karnataka, India</p> */}
+            <p>Pawan S.S</p>
+            { <p><strong>Phone:</strong> <a href="tel:+91 9900001367">+91 9900001367</a></p> }
+              <p>Kamal Adithya K</p>
+              { <p><strong>Phone:</strong> <a href="tel:+91 90956 26118">+91 90956 26118</a></p> }
+            { <p><strong>Location:</strong> Bengaluru, Karnataka, India</p> }
           </div>
 
           {/* Social Links */}
           <div className={styles.socialLinks}>
-            {/* Replace # with actual links and use Icon components */}
-            {/* <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a> */}
-            {/* <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><FaYoutube /></a> */}
-            {/* <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a> */}
+            {<a href="https://www.linkedin.com/in/pawanss/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>}
+            {<a href="https://www.youtube.com/@artoflaw" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>}
+            {<a href="https://www.instagram.com/artoflaw.in/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>}
             {/* Links potentially from: */}
           </div>
 

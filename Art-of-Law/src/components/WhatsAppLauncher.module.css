@@ -1,0 +1,132 @@
+/* src/components/WhatsAppLauncher.module.css */
+.whatsappLauncherContainer {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column-reverse; /* To have popup above the FAB */
+  align-items: flex-end;
+}
+
+.whatsappFab {
+  background-color: #25D366; /* WhatsApp Green */
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001; /* FAB above popup if they overlap slightly during animation */
+}
+
+.whatsappFab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.whatsappFab svg {
+  display: block;
+}
+
+.contactsPopup {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  width: 280px; /* Adjust width as needed */
+  margin-bottom: 10px; /* Space between FAB and popup */
+  overflow: hidden; /* Ensures border-radius clips content */
+  animation: slideUpFadeIn 0.3s ease-out;
+  border: 1px solid #e0e0e0;
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popupHeader {
+  background-color: var(--primary-color, #0a3d62); /* Use your site's primary color */
+  color: white;
+  padding: 10px 15px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closePopupButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  opacity: 0.8;
+}
+.closePopupButton:hover {
+  opacity: 1;
+}
+
+
+.popupIntro {
+  padding: 10px 15px;
+  font-size: 0.85rem;
+  color: var(--text-color-muted, #6c757d);
+  border-bottom: 1px solid #f0f0f0;
+  margin: 0;
+}
+
+.contactsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px; /* Or adjust as needed, for scrollability */
+  overflow-y: auto;
+}
+
+.contactsList li {
+  /* No border here, apply to link for full clickable area */
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: var(--text-color-dark, #212529);
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+.contactsList li:last-child .contactLink {
+  border-bottom: none;
+}
+
+
+.contactLink:hover {
+  background-color: var(--light-bg-color, #f8f9fa);
+}
+
+.contactIcon {
+  color: #25D366; /* WhatsApp Green */
+  margin-right: 10px;
+  font-size: 1.3em; /* Makes icon slightly larger */
+}
+
+.contactLink span {
+  flex-grow: 1;
+}

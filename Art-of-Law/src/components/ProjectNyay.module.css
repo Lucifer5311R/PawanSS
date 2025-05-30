@@ -1,0 +1,88 @@
+/* src/components/ProjectNyay.module.css */
+.projectNyaySection {
+  background-color: var(--light-bg-color); /* Or a distinct background */
+  padding: 4rem 0;
+}
+
+.subSectionTitle { /* Title for the Project Nyay subsection */
+  text-align: center;
+  font-size: clamp(1.6rem, 3.5vw, 2rem);
+  color: var(--primary-color);
+  margin-bottom: 2rem !important;
+}
+.subSectionTitle::after { /* Optional underline for subsection titles */
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background-color: var(--accent-color);
+  margin: 0.5rem auto 0;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .contentWrapper {
+    grid-template-columns: 1.2fr 1fr; /* Text on left, enroll message on right */
+    text-align: left;
+    align-items: center;
+  }
+}
+
+.aboutNyay h3 {
+  font-family: var(--font-family-serif);
+  color: var(--primary-color);
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
+  margin-bottom: 1rem;
+}
+
+.aboutNyay p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-color-dark);
+  margin-bottom: 1rem;
+}
+
+.enrollMessage {
+  background-color: var(--white-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  text-align: center; /* Center content within this box */
+  border-left: 5px solid var(--secondary-color);
+}
+
+.enrollMessage h4 {
+  font-family: var(--font-family-serif);
+  color: var(--secondary-color);
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  margin-bottom: 1rem;
+}
+
+.enrollMessage p {
+  font-size: 0.9rem;
+  color: var(--text-color-muted);
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.enrollButton {
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  text-transform: uppercase; /* Making it more prominent */
+}
+
+.comingSoon {
+  font-size: 0.8rem !important; /* Override p tag */
+  color: var(--text-color-muted);
+  margin-top: 0.75rem;
+  font-style: italic;
+}

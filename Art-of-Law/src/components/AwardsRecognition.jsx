@@ -18,7 +18,7 @@ function AwardsRecognition() {
       id: 2,
       title: 'Project Nyayam \u00A0UNAI',
       detail: 'UNAI recognition for impactful legal initiatives.',
-      randomInfo: 'Project Nyayam is a student-led legal outreach initiative under the United Nations Academic Impact aimed at promoting legal awareness and access to justice among all Rooted in the belief that justice should be accessible to all,  especially for marginalized communities.',
+      randomInfo: 'Project Nyayam is a student-led legal outreach initiative under the United Nations Academic Impact aimed at promoting legal awareness and access to justice among all Rooted in the belief that justice should be accessible to all,  especially for marginalized communities.',
     },
     {
       id: 5,
